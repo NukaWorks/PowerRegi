@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { AppHeader, Menu, MenuItem, MenuList, MenuBar, UiApp } from '@powerws/uikit'
+import { AppHeader, AppActivity, Menu, MenuItem, MenuList, MenuBar, UiApp } from '@powerws/uikit'
 
 export default function App() {
   return (
@@ -9,8 +9,8 @@ export default function App() {
           <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
         </Head>
 
-        <UiApp theme={'light'}>
-          <AppHeader title={'PowerRegii'}>
+        <AppActivity theme={'Light'}>
+          <AppHeader title={'PowerRegi'}>
             <MenuBar>
               <Menu title={'Actions'}>
                 <MenuList>
@@ -27,8 +27,11 @@ export default function App() {
               </Menu>
             </MenuBar>
           </AppHeader>
-        </UiApp>
 
+        <UiApp>
+          Hello World !
+        </UiApp>
+        </AppActivity>
       </>
   )
 }

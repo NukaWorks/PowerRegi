@@ -1,30 +1,41 @@
 import {AppActivity, AppHeader, Menu, MenuBar, MenuItem, MenuList, UiApp} from "../../../PowerOS/PowerWorkspace/UiKit";
+import { commercial_name } from "../package.json"
 import React from "react";
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Overview from './Views/Overview/Overview'
 
 
 export default function App() {
   return (
       <AppActivity theme={'Light'}>
-        <AppHeader title={'PowerRegi'}>
+        <AppHeader title={commercial_name}>
           <MenuBar>
             <Menu title={'Actions'}>
               <MenuList>
-                <MenuItem>Create Repository...</MenuItem>
-                <MenuItem>Create Application...</MenuItem>
+                <MenuItem>New Repository</MenuItem>
+                <MenuItem>New Application</MenuItem>
+                <MenuItem>New Package</MenuItem>
+                <MenuItem>Settings</MenuItem>
+                <MenuItem>Logout...</MenuItem>
               </MenuList>
             </Menu>
 
             <Menu title={'Help'}>
               <MenuList>
                 <MenuItem>Check for Updates...</MenuItem>
+                <MenuItem>Documentation Center</MenuItem>
                 <MenuItem>About</MenuItem>
               </MenuList>
             </Menu>
           </MenuBar>
         </AppHeader>
 
-        <UiApp>
-          Hello World !
+        <UiApp className={"App--MainView"}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Overview />} />
+            </Routes>
+          </BrowserRouter>
         </UiApp>
       </AppActivity>
   )

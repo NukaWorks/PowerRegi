@@ -10,7 +10,7 @@ export default function App() {
       <AppActivity theme={'Light'}>
         <AppHeader title={commercial_name}>
           <MenuBar>
-            <Menu title={'Actions'}>
+            <Menu title={'File'}>
               <MenuList>
                 <MenuItem>New Repository</MenuItem>
                 <MenuItem>New Application</MenuItem>
@@ -20,10 +20,17 @@ export default function App() {
               </MenuList>
             </Menu>
 
+            <Menu title={'Tools'}>
+              <MenuList>
+                <MenuItem>Refresh</MenuItem>
+              </MenuList>
+            </Menu>
+
             <Menu title={'Help'}>
               <MenuList>
                 <MenuItem>Check for Updates...</MenuItem>
                 <MenuItem>Documentation Center</MenuItem>
+                <MenuItem>About PowerWs & UiKit</MenuItem>
                 <MenuItem>About</MenuItem>
               </MenuList>
             </Menu>
@@ -33,7 +40,7 @@ export default function App() {
         <UiApp className={"App--MainView"}>
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Overview />} />
+              <Route path="/home" element={<Overview />} />
             </Routes>
           </BrowserRouter>
         </UiApp>

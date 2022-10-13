@@ -9,7 +9,7 @@ export default function EmptyDataBtn(props) {
       <img src={ic_add} alt={'Add'} />
       <div className={'Modules--EmptyDataBtn__Text'}>
         <h1>No repository yet.</h1>
-        <p>Go to Actions and <Link href={'#'}>Create a New Repository</Link> to get started !</p>
+        <p>Go to Actions and <b>Create a New Repository</b> to get started !</p>
       </div>
     </div>
   )

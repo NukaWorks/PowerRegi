@@ -31,13 +31,13 @@ export default function App() {
                 <MenuItem>Check for Updates...</MenuItem>
                 <MenuItem>Documentation Center</MenuItem>
                 <MenuItem>About PowerWs & UiKit</MenuItem>
-                <MenuItem>About</MenuItem>
+                <MenuItem>About {commercial_name}</MenuItem>
               </MenuList>
             </Menu>
           </MenuBar>
         </AppHeader>
 
-        <UiApp className={"App--MainView"}>
+        <UiApp rounded>
           <BrowserRouter>
             <Routes>
               <Route path="/home" element={<Overview />} />

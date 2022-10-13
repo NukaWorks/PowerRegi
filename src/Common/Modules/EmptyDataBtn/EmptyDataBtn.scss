@@ -10,6 +10,16 @@
     border-radius: 15px;
     width: 60em;
     height: 40em;
+    user-select: none;
+    transition: background-color 0.1s ease-in-out;
+
+    &:hover {
+      background-color: #fdf6f6;
+    }
+
+    &:active {
+      background-color: #fcf2f2;
+    }
 
     & img {
       width: 10em;

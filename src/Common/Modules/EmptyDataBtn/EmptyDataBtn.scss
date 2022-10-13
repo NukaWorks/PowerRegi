@@ -11,14 +11,17 @@
     width: 60em;
     height: 40em;
     user-select: none;
-    transition: background-color 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
 
     &:hover {
       background-color: #fdf6f6;
+      box-shadow: 8px 7px 0 black;
     }
 
     &:active {
       background-color: #fcf2f2;
+      box-shadow: 1px 2px 0 black;
+
     }
 
     & img {

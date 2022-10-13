@@ -1,0 +1,12 @@
+.Dynamic {
+  &--Header {
+    display: flex;
+    gap: 0.5em;
+  }
+
+  &--Content {
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+  }
+}

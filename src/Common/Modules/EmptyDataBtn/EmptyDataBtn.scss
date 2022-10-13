@@ -1,0 +1,36 @@
+.Modules {
+  &--EmptyDataBtn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+    background-color: #FFFCFC;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    width: 60em;
+    height: 40em;
+
+    & img {
+      width: 10em;
+      height: auto;
+    }
+
+    &__Text {
+      font-family: "Outfit", sans-serif;
+      text-align: center;
+
+      & h1 {
+        font-weight: 600;
+        font-size: 29pt;
+        margin: 0;
+      }
+
+      & p {
+        font-weight: 300;
+        font-size: 14pt;
+        margin: 0;
+      }
+    }
+  }
+}

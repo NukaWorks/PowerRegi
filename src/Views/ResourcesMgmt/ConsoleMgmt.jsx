@@ -1,14 +1,14 @@
 import React from 'react'
 
-export default function ResourcesMgmt () {
+export default function ConsoleMgmt () {
   return (
       <>
         <div className={'Dynamic--Header'}>
-          <h1>Resources Management</h1>
+          <h1>Console Management</h1>
         </div>
 
         <div className={'Dynamic--Content'}>
-          <h1>Resources Management</h1>
+          <p>Console Management</p>
         </div>
       </>
   )

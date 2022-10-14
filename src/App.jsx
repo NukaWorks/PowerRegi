@@ -3,6 +3,7 @@ import { commercial_name } from "../package.json"
 import React from "react";
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Overview from './Views/Overview/Overview'
+import ResourcesMgmt from './Views/ResourcesMgmt/ResourcesMgmt'
 
 
 export default function App() {
@@ -41,6 +42,7 @@ export default function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/home" element={<Overview />} />
+              <Route path={"/rsc_mgmt"} element={<ResourcesMgmt />}/>
             </Routes>
           </BrowserRouter>
         </UiApp>

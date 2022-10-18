@@ -2,7 +2,7 @@ import {AppActivity, AppHeader, Menu, MenuBar, MenuItem, MenuList, UiApp} from "
 import { commercial_name } from "../package.json"
 import React from "react";
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Overview from './Views/Overview/Overview'
+import Home from './Views/Overview/Overview'
 import ConsoleMgmt from './Views/ResourcesMgmt/ConsoleMgmt'
 
 
@@ -41,7 +41,7 @@ export default function App() {
         <UiApp rounded>
           <BrowserRouter>
             <Routes>
-              <Route path="/home" element={<Overview />} />
+              <Route path="/home" element={<Home />} />
               <Route path={"/console"} element={<ConsoleMgmt />}/>
             </Routes>
           </BrowserRouter>

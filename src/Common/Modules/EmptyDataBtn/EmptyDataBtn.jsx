@@ -1,6 +1,6 @@
 import React from 'react'
 import './EmptyDataBtn.scss'
-import ic_add from '../../Assets/ic_add.svg'
+import ic_add from '../../Assets/AddIcon.svg'
 import { commercial_name } from '../../../../package.json'
 
 export default function EmptyDataBtn(props) {

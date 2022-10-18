@@ -1,6 +1,6 @@
 import React from 'react'
 import './ErrorView.scss'
-import ExclamationIcon from '../../Common/Assets/ExclamationIcon.svg'
+import ExclamationIcon from '../../Common/Assets/Icons/ExclamationIcon.svg'
 
 export default function ErrorView() {
     return (

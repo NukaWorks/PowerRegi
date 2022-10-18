@@ -1,5 +1,6 @@
 import React from 'react'
 import EmptyDataBtn from '../../Common/Modules/EmptyDataBtn/EmptyDataBtn'
+import './Overview.scss'
 
 export default function Overview() {
   return (
@@ -8,7 +9,7 @@ export default function Overview() {
         <h1>Overview</h1>
       </div>
 
-      <div className={'Dynamic--Content'} style={{justifyContent: 'center', alignItems: 'center'}}>
+      <div className={'Dynamic--Content'}>
         <EmptyDataBtn />
       </div>
     </>

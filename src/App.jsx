@@ -4,6 +4,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './Views/Overview/Overview'
 import ConsoleMgmt from './Views/ResourcesMgmt/ConsoleMgmt'
+import ErrorView from './Views/ErrorView/ErrorView'
 
 
 export default function App() {
@@ -41,8 +42,9 @@ export default function App() {
         <UiApp rounded>
           <BrowserRouter>
             <Routes>
-              <Route path="/home" element={<Home />} />
-              <Route path={"/console"} element={<ConsoleMgmt />}/>
+              <Route caseSensitive path="/home" element={<Home />} />
+              <Route caseSensitive path={"/console"} element={<ConsoleMgmt />}/>
+              <Route path="*" element={<ErrorView />} />
             </Routes>
           </BrowserRouter>
         </UiApp>

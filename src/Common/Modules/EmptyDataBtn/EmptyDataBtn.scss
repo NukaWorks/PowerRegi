@@ -11,7 +11,14 @@
     width: 60em;
     height: 40em;
     user-select: none;
-    transition: all 0.1s ease-in-out;
+    transition: background-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+
+    @media screen and (max-width: 900px) {
+      flex-direction: row;
+      width: fit-content;
+      height: fit-content;
+      padding: 2em 3em;
+    }
 
     &:hover {
       background-color: #fdf6f6;
@@ -21,11 +28,10 @@
     &:active {
       background-color: #fcf2f2;
       box-shadow: 3px 4px 0 black;
-
     }
 
     & img {
-      width: 10em;
+      width: clamp(4em, 10vw, 10em);
       height: auto;
     }
 
@@ -35,14 +41,14 @@
 
       & h1 {
         font-weight: 600;
-        font-size: 29pt;
-        margin: 0;
+        font-size: clamp(8pt, 5vw, 29pt);
+        white-space: nowrap;
       }
 
       & p {
         font-weight: 200;
-        font-size: 14pt;
-        margin: 0;
+        font-size: clamp(4pt, 3vw, 14pt);
+        text-align: left;
       }
     }
   }

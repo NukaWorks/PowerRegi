@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './Views/Overview/HomeView'
 import ConsoleMgmt from './Views/ConsoleMgmt/ConsoleMgmt'
 import ErrorView from './Views/ErrorView/ErrorView'
+import ErrorTypes from './Common/Misc/ErrorTypes'
 
 export default function App() {
   return (
@@ -43,7 +44,7 @@ export default function App() {
             <Routes>
               <Route caseSensitive path="/home" element={<Home />} />
               <Route caseSensitive path={"/console"} element={<ConsoleMgmt />}/>
-              <Route path="*" element={<ErrorView />} />
+              <Route path="*" element={<ErrorView errorCode={ErrorTypes['404']} />} />
             </Routes>
           </BrowserRouter>
         </UiApp>

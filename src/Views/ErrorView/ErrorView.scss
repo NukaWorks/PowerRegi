@@ -22,6 +22,11 @@
         & h4 {
           font-weight: 600;
         }
+
+        &--ErrorCode {
+          font-size: clamp(0.7em, 2vw, 1em);
+          font-weight: 200;
+        }
       }
 
       &__ExclamationIcon {

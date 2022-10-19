@@ -2,8 +2,9 @@ import React from 'react'
 import './ErrorView.scss'
 import ExclamationIcon from '../../Common/Assets/Icons/ExclamationIcon.svg'
 import { commercial_name } from '../../../package.json'
+import PropTypes from 'prop-types'
 
-export default function ErrorView() {
+export default function ErrorView(props) {
     return (
         <>
           <div className={'Dynamic__Header'}>
@@ -18,11 +19,19 @@ export default function ErrorView() {
                 <h4>{ commercial_name } was crashed and need to be reloaded.</h4>
 
                 <div className={'App__ErrorView--Message__Intro--ErrorCode'}>
-                    <p>ErrorCode: <code>404 — ERR_PAGE_NOT_FOUND</code></p>
+                    <p>ErrorCode: <code>{ props.status }</code></p>
                 </div>
               </div>
             </div>
           </div>
         </>
     );
+}
+
+ErrorView.propTypes = {
+    status: PropTypes.string.isRequired,
+}
+
+ErrorView.defaultProps = {
+  status: '0xFF — ERR_UNKNOWN',
 }

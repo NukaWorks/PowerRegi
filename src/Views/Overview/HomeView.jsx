@@ -1,15 +1,15 @@
 import React from 'react'
 import EmptyDataBtn from '../../Common/Modules/EmptyDataBtn/EmptyDataBtn'
-import './Overview.scss'
+import './HomeView.scss'
 
-export default function Overview() {
+export default function HomeView() {
   return (
     <>
-      <div className={'Dynamic--Header'}>
+      <div className={'Dynamic__Header'}>
         <h1>Overview</h1>
       </div>
 
-      <div className={'Dynamic--Content Overview'}>
+      <div className={'Dynamic__Content App__HomeView'}>
         <EmptyDataBtn />
       </div>
     </>

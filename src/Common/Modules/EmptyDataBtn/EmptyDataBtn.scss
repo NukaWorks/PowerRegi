@@ -1,5 +1,5 @@
 .Modules {
-  &--EmptyDataBtn {
+  &__EmptyDataBtn {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,7 +46,7 @@
       height: auto;
     }
 
-    &__Text {
+    &--Text {
       font-family: "Outfit", sans-serif;
       text-align: center;
 

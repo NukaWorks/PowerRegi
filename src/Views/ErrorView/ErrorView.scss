@@ -1,23 +1,25 @@
-.ErrorView {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
+.App {
+  &__ErrorView {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
 
-  &__Container {
-    display: flex;
-    align-items: center;
-    color: #DD8888;
-    gap: 3em;
-  }
+    &__Container {
+      display: flex;
+      align-items: center;
+      color: #DD8888;
+      gap: 3em;
+    }
 
-  &__Intro {
-    font-size: clamp(1rem, 2.5vw, 3em);
-    white-space: nowrap;
-  }
+    &__Intro {
+      font-size: clamp(1rem, 2.5vw, 3em);
+      white-space: nowrap;
+    }
 
-  &__ExclamationIcon {
-    width: clamp(4em, 10vw, 20em);
-    height: auto;
+    &__ExclamationIcon {
+      width: clamp(4em, 10vw, 20em);
+      height: auto;
+    }
   }
 }

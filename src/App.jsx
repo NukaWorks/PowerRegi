@@ -2,7 +2,7 @@ import {AppActivity, AppHeader, Menu, MenuBar, MenuItem, MenuList, UiApp} from "
 import { commercial_name } from "../package.json"
 import React from "react";
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Home from './Views/Overview/Overview'
+import Home from './Views/Overview/HomeView'
 import ConsoleMgmt from './Views/ResourcesMgmt/ConsoleMgmt'
 import ErrorView from './Views/ErrorView/ErrorView'
 

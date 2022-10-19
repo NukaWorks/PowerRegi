@@ -1,11 +1,11 @@
 .Dynamic {
-  &--Header {
+  &__Header {
     display: flex;
     gap: 0.5em;
     padding-block: 1em;
   }
 
-  &--Content {
+  &__Content {
     display: flex;
     flex-direction: column;
     flex: auto;

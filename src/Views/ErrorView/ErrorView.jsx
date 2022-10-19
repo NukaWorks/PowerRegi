@@ -5,11 +5,11 @@ import ExclamationIcon from '../../Common/Assets/Icons/ExclamationIcon.svg'
 export default function ErrorView() {
     return (
         <>
-          <div className={'Dynamic--Header'}>
+          <div className={'Dynamic__Header'}>
             <h1>ErrorView</h1>
           </div>
 
-          <div className={'Dynamic--Content ErrorView'} style={{justifyContent: 'center', alignItems: 'center'}}>
+          <div className={'Dynamic__Content App__ErrorView'} style={{justifyContent: 'center', alignItems: 'center'}}>
             <div className={'ErrorView__Container'}>
               <img className={'ErrorView__ExclamationIcon'} alt={"ExclamationIcon"} src={ExclamationIcon} />
               <div className={'ErrorView__Intro'}>

@@ -5,19 +5,19 @@
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
 
-    &__Container {
+    &--Container {
       display: flex;
       align-items: center;
       color: #DD8888;
       gap: 3em;
     }
 
-    &__Intro {
+    &--Intro {
       font-size: clamp(1rem, 2.5vw, 3em);
       white-space: nowrap;
     }
 
-    &__ExclamationIcon {
+    &--ExclamationIcon {
       width: clamp(4em, 10vw, 20em);
       height: auto;
     }

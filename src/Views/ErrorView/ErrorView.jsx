@@ -1,6 +1,7 @@
 import React from 'react'
 import './ErrorView.scss'
 import ExclamationIcon from '../../Common/Assets/Icons/ExclamationIcon.svg'
+import { commercial_name } from '../../../package.json'
 
 export default function ErrorView() {
     return (
@@ -10,11 +11,11 @@ export default function ErrorView() {
           </div>
 
           <div className={'Dynamic__Content App__ErrorView'}>
-            <div className={'App__ErrorView__Container'}>
-              <img className={'App__ErrorView__ExclamationIcon'} alt={"ExclamationIcon"} src={ExclamationIcon} />
-              <div className={'App__ErrorView__Intro'}>
+            <div className={'App__ErrorView--Container'}>
+              <img className={'App__ErrorView--ExclamationIcon'} alt={"ExclamationIcon"} src={ExclamationIcon} />
+              <div className={'App__ErrorView--Intro'}>
                 <h1>Unfortunately</h1>
-                <h4>The view was crashed and need to be reloaded.</h4>
+                <h4>{ commercial_name } was crashed and need to be reloaded.</h4>
               </div>
             </div>
           </div>

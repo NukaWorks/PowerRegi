@@ -6,7 +6,6 @@ import Home from './Views/Overview/HomeView'
 import ConsoleMgmt from './Views/ConsoleMgmt/ConsoleMgmt'
 import ErrorView from './Views/ErrorView/ErrorView'
 
-
 export default function App() {
   return (
       <AppActivity theme={'Light'}>

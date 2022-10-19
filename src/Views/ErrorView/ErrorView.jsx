@@ -9,10 +9,10 @@ export default function ErrorView() {
             <h1>ErrorView</h1>
           </div>
 
-          <div className={'Dynamic__Content App__ErrorView'} style={{justifyContent: 'center', alignItems: 'center'}}>
-            <div className={'ErrorView__Container'}>
-              <img className={'ErrorView__ExclamationIcon'} alt={"ExclamationIcon"} src={ExclamationIcon} />
-              <div className={'ErrorView__Intro'}>
+          <div className={'Dynamic__Content App__ErrorView'}>
+            <div className={'App__ErrorView__Container'}>
+              <img className={'App__ErrorView__ExclamationIcon'} alt={"ExclamationIcon"} src={ExclamationIcon} />
+              <div className={'App__ErrorView__Intro'}>
                 <h1>Unfortunately</h1>
                 <h4>The view was crashed and need to be reloaded.</h4>
               </div>

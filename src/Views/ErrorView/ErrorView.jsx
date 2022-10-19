@@ -20,7 +20,7 @@ export default function ErrorView(props) {
                 <h4>{ commercial_name } was crashed and need to be reloaded.</h4>
 
                 <div className={'App__ErrorView--Message__Intro--ErrorCode'}>
-                    <p>ErrorCode: <code>{ props.errorCode }</code></p>
+                  { props.errorCode }
                 </div>
               </div>
             </div>

@@ -25,7 +25,13 @@
 
         &--ErrorCode {
           font-size: clamp(0.7em, 2vw, 1em);
-          font-weight: 200;
+          font-weight: bold;
+          font-family: 'Space Mono', monospace;
+
+          & code {
+            font-weight: 200;
+            font-family: inherit;
+          }
         }
       }
 

@@ -11,13 +11,24 @@
     width: 60em;
     height: 40em;
     user-select: none;
-    transition: background-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    transition:
+            background-color 0.1s ease-in-out,
+            box-shadow 0.1s ease-in-out;
 
-    @media screen and (max-width: 900px) {
+    @media screen and (max-width: 900px),
+    screen and (max-height: 700px) {
       flex-direction: row;
       width: fit-content;
       height: fit-content;
       padding: 2em 3em;
+
+      &__Text {
+        text-align: left !important;
+
+        & p {
+          width: 256px;
+        }
+      }
     }
 
     &:hover {
@@ -48,7 +59,6 @@
       & p {
         font-weight: 200;
         font-size: clamp(4pt, 3vw, 14pt);
-        text-align: left;
       }
     }
   }

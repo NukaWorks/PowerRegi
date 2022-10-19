@@ -15,6 +15,10 @@
     &--Intro {
       font-size: clamp(1rem, 2.5vw, 3em);
       white-space: nowrap;
+
+      & h4 {
+        font-weight: 600;
+      }
     }
 
     &--ExclamationIcon {

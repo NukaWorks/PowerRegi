@@ -9,7 +9,7 @@ export default function Overview() {
         <h1>Overview</h1>
       </div>
 
-      <div className={'Dynamic--Content'}>
+      <div className={'Dynamic--Content Overview'}>
         <EmptyDataBtn />
       </div>
     </>

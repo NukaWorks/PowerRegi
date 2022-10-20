@@ -5,10 +5,9 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
+    "dev:webui": "vite",
     "dev:server": "nodemon ./src/Server/server.js",
-    "build": "vite build",
-    "serve": "vite preview",
+    "build:webui": "vite build",
     "start:server": "pm2 start ./src/Server/server.js -i -1",
     "start:webui": "pm2 start ./src/Server/webui.js"
   },

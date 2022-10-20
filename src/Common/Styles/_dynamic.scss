@@ -1,5 +1,6 @@
 .Dynamic {
   &__Header {
+    user-select: none;
     display: flex;
     gap: 0.5em;
     padding-block: 1em;

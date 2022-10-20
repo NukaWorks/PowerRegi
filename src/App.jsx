@@ -13,7 +13,9 @@ export default function App() {
   const [loading, setLoading] = React.useState(true)
 
   useEffect(() => {
-    setLoading(false)
+    setTimeout(() => {
+      setLoading(true)
+    }, 2000)
   })
 
   return (
@@ -48,7 +50,7 @@ export default function App() {
           </MenuBar>
         </AppHeader>
 
-        {loading ? (<h1>Loading</h1>) : (
+        {loading ? (<div className={'App__LoadingScreen'}>Loading</div>) : (
             <UiApp rounded>
               <BrowserRouter>
                 <Routes>

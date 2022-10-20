@@ -1,12 +1,12 @@
-import {AppActivity, AppHeader, Menu, MenuBar, MenuItem, MenuList, UiApp} from "@powerws/uikit";
-import { commercial_name } from "../package.json"
-import React from "react";
+import { AppActivity, AppHeader, Menu, MenuBar, MenuItem, MenuList, UiApp } from '@powerws/uikit'
+import { commercial_name } from '../package.json'
+import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './Views/Overview/HomeView'
 import ConsoleMgmt from './Views/ConsoleMgmt/ConsoleMgmt'
 import ErrorView from './Views/ErrorView/ErrorView'
 import ErrorTypes from './Common/Misc/ErrorTypes'
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
 
 export default function App() {
   return (
@@ -44,9 +44,9 @@ export default function App() {
         <UiApp rounded>
           <BrowserRouter>
             <Routes>
-              <Route caseSensitive path="/home" element={<Home />} />
-              <Route caseSensitive path={"/console"} element={<ConsoleMgmt />}/>
-              <Route path="*" element={<ErrorView errorCode={ErrorTypes['404']} />} />
+              <Route caseSensitive path="/home" element={<Home/>}/>
+              <Route caseSensitive path={'/console'} element={<ConsoleMgmt/>}/>
+              <Route path="*" element={<ErrorView errorCode={ErrorTypes['404']}/>}/>
             </Routes>
           </BrowserRouter>
         </UiApp>

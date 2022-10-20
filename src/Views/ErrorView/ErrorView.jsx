@@ -9,7 +9,7 @@ export default function ErrorView(props) {
     return (
         <>
           <div className={'Dynamic__Header'}>
-            <h1>Ooops</h1>
+            <h1>Application Error</h1>
           </div>
 
           <div className={'Dynamic__Content App__ErrorView'}>

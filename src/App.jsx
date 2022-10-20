@@ -6,6 +6,7 @@ import Home from './Views/Overview/HomeView'
 import ConsoleMgmt from './Views/ConsoleMgmt/ConsoleMgmt'
 import ErrorView from './Views/ErrorView/ErrorView'
 import ErrorTypes from './Common/Misc/ErrorTypes'
+import { useNavigate } from "react-router-dom";
 
 export default function App() {
   return (
@@ -24,7 +25,8 @@ export default function App() {
 
             <Menu title={'Tools'}>
               <MenuList>
-                <MenuItem>Refresh</MenuItem>
+                <MenuItem onClick={() => window.location = '/home'}>Go to Home View</MenuItem>
+                <MenuItem onClick={() => window.location.reload()}>Refresh</MenuItem>
               </MenuList>
             </Menu>
 

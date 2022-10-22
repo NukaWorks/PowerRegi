@@ -55,7 +55,7 @@ export default function App() {
             <UiApp rounded>
               <BrowserRouter>
                 <Routes>
-                  <Route path={'/'} element={<Navigate to={'/home'} />} />
+                  <Route path={'/'} element={<Navigate replace to={'/home'} />} />
                   <Route caseSensitive path="/idmsa" element={<IdmsaView />}/>
                   <Route caseSensitive path="/home" element={<Home/>}/>
                   <Route caseSensitive path={'/console'} element={<ConsoleMgmt/>}/>

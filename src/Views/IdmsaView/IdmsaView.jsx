@@ -10,11 +10,21 @@ export default function IdmsaView() {
         </div>
 
         <div className={'Dynamic__Content App__IdmsaView'}>
-          <h1 className={'App__IdmsaView--IdmsaUi__Title'}>Hi ! 👋</h1>
-          <TextField type={'text'} placeholder={'Username'} />
-          <TextField type={'password'} placeholder={'Password'} />
-          <Link href={'#'}>I forgot</Link>
-          <Button>Login</Button>
+          <div className={'App__IdmsaView--IdmsaUi'}>
+            <div className={'App__IdmsaView--IdmsaUi__Header'}>
+              <h1 className={'App__IdmsaView--IdmsaUi__Header--Title'}>Hi ! 👋</h1>
+            </div>
+
+            <div className={'App__IdmsaView--IdmsaUi__Fields'}>
+              <TextField type={'text'} placeholder={'Username'}/>
+              <TextField type={'password'} placeholder={'Password'}/>
+            </div>
+
+            <div className={'App__IdmsaView--IdmsaUi__Controls'}>
+              <Link href={'#'}>I forgot my account</Link>
+              <Button color={'Primary'}>Login</Button>
+            </div>
+          </div>
         </div>
       </>
   )

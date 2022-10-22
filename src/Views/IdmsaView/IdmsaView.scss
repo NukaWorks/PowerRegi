@@ -1,5 +1,36 @@
 .App {
   &__IdmsaView {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
+    &--IdmsaUi {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background-color: #FFFBFC;
+      width: 30em;
+      height: 30em;
+      padding: 2em;
+      border-radius: 20px;
+      box-shadow: 8px 7px 0 black;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+
+      &__Fields {
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+        gap: 0.3em;
+      }
+
+      &__Controls {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100%;
+      }
+    }
   }
 }

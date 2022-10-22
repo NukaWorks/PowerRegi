@@ -1,4 +1,4 @@
-import { AppActivity, AppHeader, Menu, MenuBar, MenuItem, MenuList, UiApp } from '@powerws/uikit'
+import { AppActivity, AppHeader, Menu, MenuBar, MenuItem, MenuList, Spinner, UiApp } from '@powerws/uikit'
 import { commercial_name } from '../package.json'
 import React, { useEffect } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
@@ -50,7 +50,11 @@ export default function App() {
           </MenuBar>
         </AppHeader>
 
-        {loading ? (<div className={'App__LoadingScreen'}>Loading</div>) : (
+        {loading ? (
+            <div className={'App__LoadingScreen'}>
+              <Spinner size={'Large'} color={'Blue'} />
+            </div>
+        ) : (
             <UiApp rounded>
               <BrowserRouter>
                 <Routes>

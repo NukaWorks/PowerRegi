@@ -13,16 +13,19 @@ export default function IdmsaView() {
           <div className={'App__IdmsaView--IdmsaUi'}>
             <div className={'App__IdmsaView--IdmsaUi__Header'}>
               <h1 className={'App__IdmsaView--IdmsaUi__Header--Title'}>Hi ! 👋</h1>
+              <span className={'App__IdmsaView--IdmsaUi__Header--HelpIcon'}>?</span>
             </div>
 
-            <div className={'App__IdmsaView--IdmsaUi__Fields'}>
-              <TextField type={'text'} placeholder={'Username'}/>
-              <TextField type={'password'} placeholder={'Password'}/>
-            </div>
+            <div className={'App__IdmsaView--IdmsaUi__Content'}>
+              <div className={'App__IdmsaView--IdmsaUi__Content--Fields'}>
+                <TextField type={'text'} placeholder={'Username'}/>
+                <TextField type={'password'} placeholder={'Password'}/>
+              </div>
 
-            <div className={'App__IdmsaView--IdmsaUi__Controls'}>
-              <Link href={'#'}>I forgot my account</Link>
-              <Button color={'Primary'}>Login</Button>
+              <div className={'App__IdmsaView--IdmsaUi__Content--Controls'}>
+                <Link href={'#'}>I forgot my account</Link>
+                <Button color={'Primary'}>Login</Button>
+              </div>
             </div>
           </div>
         </div>

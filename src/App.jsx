@@ -6,7 +6,6 @@ import Home from './Views/Overview/HomeView'
 import ConsoleMgmt from './Views/ConsoleMgmt/ConsoleMgmt'
 import ErrorView from './Views/ErrorView/ErrorView'
 import ErrorTypes from './Common/Misc/ErrorTypes'
-import { useNavigate } from 'react-router-dom'
 import IdmsaView from './Views/IdmsaView/IdmsaView'
 
 export default function App() {

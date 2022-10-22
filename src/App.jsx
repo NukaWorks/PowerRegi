@@ -1,7 +1,7 @@
 import { AppActivity, AppHeader, Menu, MenuBar, MenuItem, MenuList, Spinner, UiApp } from '@powerws/uikit'
 import { commercial_name } from '../package.json'
 import React, { useEffect } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Home from './Views/Overview/HomeView'
 import ConsoleMgmt from './Views/ConsoleMgmt/ConsoleMgmt'
 import ErrorView from './Views/ErrorView/ErrorView'
@@ -56,6 +56,7 @@ export default function App() {
             <UiApp rounded>
               <BrowserRouter>
                 <Routes>
+                  <Route path={'/'} element={<Navigate to={'/home'} />} />
                   <Route caseSensitive path="/idmsa" element={<IdmsaView />}/>
                   <Route caseSensitive path="/home" element={<Home/>}/>
                   <Route caseSensitive path={'/console'} element={<ConsoleMgmt/>}/>

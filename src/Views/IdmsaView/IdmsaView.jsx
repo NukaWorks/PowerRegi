@@ -1,6 +1,6 @@
 import React from 'react'
 import './IdmsaView.scss'
-import { Spinner } from '@powerws/uikit'
+import { Button } from '@powerws/uikit'
 
 export default function IdmsaView() {
   return (
@@ -10,7 +10,7 @@ export default function IdmsaView() {
         </div>
 
         <div className={'Dynamic__Content App__IdmsaView'}>
-
+          <Button>Click me</Button>
         </div>
       </>
   )

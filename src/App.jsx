@@ -7,15 +7,13 @@ import ConsoleMgmt from './Views/ConsoleMgmt/ConsoleMgmt'
 import ErrorView from './Views/ErrorView/ErrorView'
 import ErrorTypes from './Common/Misc/ErrorTypes'
 import { useNavigate } from 'react-router-dom'
-import InitView from './Views/InitView/InitView'
+import IdmsaView from './Views/IdmsaView/IdmsaView'
 
 export default function App() {
   const [loading, setLoading] = React.useState(true)
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(true)
-    }, 2000)
+    setLoading(false)
   })
 
   return (
@@ -58,7 +56,7 @@ export default function App() {
             <UiApp rounded>
               <BrowserRouter>
                 <Routes>
-                  <Route caseSensitive path="/" element={<InitView />}/>
+                  <Route caseSensitive path="/idmsa" element={<IdmsaView />}/>
                   <Route caseSensitive path="/home" element={<Home/>}/>
                   <Route caseSensitive path={'/console'} element={<ConsoleMgmt/>}/>
                   <Route path="*" element={<ErrorView errorCode={ErrorTypes['404']}/>}/>

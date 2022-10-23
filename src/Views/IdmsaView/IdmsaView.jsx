@@ -37,6 +37,7 @@ export default function IdmsaView() {
                     className={'App__IdmsaView--IdmsaUi__Content--Fields__Field'}
                     type={'password'}
                     placeholder={'Password'}
+                    disabled
                 />
               </div>
 

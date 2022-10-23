@@ -39,7 +39,7 @@ export default function IdmsaView() {
               </Menu>
             </div>
 
-            <div className={'App__IdmsaView--IdmsaUi__Content'}>
+            <form className={'App__IdmsaView--IdmsaUi__Content'}>
               <h3 className={'App__IdmsaView--IdmsaUi__Content--Title'}>Login</h3>
               <div className={'App__IdmsaView--IdmsaUi__Content--Fields'}>
                 <TextField
@@ -47,6 +47,7 @@ export default function IdmsaView() {
                     type={'text'}
                     placeholder={'Username'}
                     ref={fldUsername}
+                    autoComplete={'username'}
                 />
 
                 <TextField
@@ -55,6 +56,7 @@ export default function IdmsaView() {
                     placeholder={'Password'}
                     disabled={formDisabled}
                     ref={fldPassword}
+                    autoComplete={'current-password'}
                 />
               </div>
 
@@ -62,7 +64,7 @@ export default function IdmsaView() {
                 <Link href={'#'}>I forgot my account</Link>
                 <Button color={'Primary'}>Login</Button>
               </div>
-            </div>
+            </form>
 
             <div className={'App__IdmsaView--IdmsaUi__Footer'}>
               <p className={'App__IdmsaView--IdmsaUi__Footer--InstanceLocation'}>

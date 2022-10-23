@@ -2,6 +2,7 @@ import React from 'react'
 import './IdmsaView.scss'
 import { Button, Link, Menu, MenuItem, MenuList, TextField } from '@powerws/uikit'
 import { commercial_name, version } from '../../../package.json'
+
 export default function IdmsaView() {
   return (
       <>
@@ -13,7 +14,10 @@ export default function IdmsaView() {
           <div className={'App__IdmsaView--IdmsaUi'}>
             <div className={'App__IdmsaView--IdmsaUi__Header'}>
               <h1 className={'App__IdmsaView--IdmsaUi__Header--Title'}>Hi ! 👋</h1>
-              <Menu className={'App__IdmsaView--IdmsaUi__Header--HelpIcon'} title={'?'}>
+              <Menu className={'App__IdmsaView--IdmsaUi__Header--HelpIcon'} title={
+                <span className="material-symbols-rounded">
+                  help
+                </span>}>
                 <MenuList>
                   <MenuItem>About Idmsa LoginSystem</MenuItem>
                 </MenuList>
@@ -48,7 +52,7 @@ export default function IdmsaView() {
               </p>
 
               <p className={'App__IdmsaView--IdmsaUi__Footer--AppVersion'}>
-                <code>{ commercial_name } { version }</code>
+                <code>{commercial_name} {version}</code>
               </p>
             </div>
           </div>

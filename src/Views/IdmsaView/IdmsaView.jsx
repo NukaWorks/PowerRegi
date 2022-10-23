@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { createRef, useEffect } from 'react'
 import './IdmsaView.scss'
 import { Button, Link, Menu, MenuItem, MenuList, TextField } from '@powerws/uikit'
 import { commercial_name, version } from '../../../package.json'
 
 export default function IdmsaView() {
+  const [formDisabled, setFormDisabled] = React.useState(true)
+  const fldUsername = createRef()
+  const fldPassword = createRef()
+
+  useEffect(() => {
+    console.log({fldUsername, fldPassword})
+  }, [])
 
   return (
       <>
@@ -31,17 +38,17 @@ export default function IdmsaView() {
               <div className={'App__IdmsaView--IdmsaUi__Content--Fields'}>
                 <TextField
                     className={'App__IdmsaView--IdmsaUi__Content--Fields__Field'}
-                    id={'fld-username'}
                     type={'text'}
                     placeholder={'Username'}
+                    ref={fldUsername}
                 />
 
                 <TextField
                     className={'App__IdmsaView--IdmsaUi__Content--Fields__Field'}
-                    id={'fld-password'}
                     type={'password'}
                     placeholder={'Password'}
-                    disabled
+                    disabled={formDisabled}
+                    ref={fldPassword}
                 />
               </div>
 

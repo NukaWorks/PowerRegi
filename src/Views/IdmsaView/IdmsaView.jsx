@@ -4,6 +4,7 @@ import { Button, Link, Menu, MenuItem, MenuList, TextField } from '@powerws/uiki
 import { commercial_name, version } from '../../../package.json'
 
 export default function IdmsaView() {
+
   return (
       <>
         <div className={'Dynamic__Header'}>
@@ -17,7 +18,8 @@ export default function IdmsaView() {
               <Menu className={'App__IdmsaView--IdmsaUi__Header--HelpIcon'} title={
                 <span className="material-symbols-rounded">
                   help
-                </span>}>
+                </span>
+              }>
                 <MenuList>
                   <MenuItem>About Idmsa LoginSystem</MenuItem>
                 </MenuList>
@@ -29,12 +31,14 @@ export default function IdmsaView() {
               <div className={'App__IdmsaView--IdmsaUi__Content--Fields'}>
                 <TextField
                     className={'App__IdmsaView--IdmsaUi__Content--Fields__Field'}
+                    id={'fld-username'}
                     type={'text'}
                     placeholder={'Username'}
                 />
 
                 <TextField
                     className={'App__IdmsaView--IdmsaUi__Content--Fields__Field'}
+                    id={'fld-password'}
                     type={'password'}
                     placeholder={'Password'}
                     disabled

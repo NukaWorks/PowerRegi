@@ -6,7 +6,7 @@ export default function IdmsaView() {
   return (
       <>
         <div className={'Dynamic__Header'}>
-          <h1>Login</h1>
+          <h1>Idmsa Login</h1>
         </div>
 
         <div className={'Dynamic__Content App__IdmsaView'}>
@@ -17,6 +17,7 @@ export default function IdmsaView() {
             </div>
 
             <div className={'App__IdmsaView--IdmsaUi__Content'}>
+              <h3 className={'App__IdmsaView--IdmsaUi__Content--Title'}>Login</h3>
               <div className={'App__IdmsaView--IdmsaUi__Content--Fields'}>
                 <TextField
                     className={'App__IdmsaView--IdmsaUi__Content--Fields__Field'}

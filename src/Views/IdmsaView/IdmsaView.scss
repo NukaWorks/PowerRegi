@@ -32,6 +32,12 @@
         gap: 1em;
         flex: 1;
 
+        &--Title {
+          align-self: flex-start;
+          font-weight: 300;
+          font-size: 15pt;
+        }
+
         &--Fields {
           display: flex;
           flex-direction: column;

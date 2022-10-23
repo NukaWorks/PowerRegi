@@ -1,6 +1,6 @@
 import React from 'react'
 import './IdmsaView.scss'
-import { Button, Link, TextField } from '@powerws/uikit'
+import { Button, Link, Menu, MenuItem, MenuList, TextField } from '@powerws/uikit'
 import { commercial_name, version } from '../../../package.json'
 export default function IdmsaView() {
   return (
@@ -13,7 +13,11 @@ export default function IdmsaView() {
           <div className={'App__IdmsaView--IdmsaUi'}>
             <div className={'App__IdmsaView--IdmsaUi__Header'}>
               <h1 className={'App__IdmsaView--IdmsaUi__Header--Title'}>Hi ! 👋</h1>
-              <span className={'App__IdmsaView--IdmsaUi__Header--HelpIcon'}>?</span>
+              <Menu className={'App__IdmsaView--IdmsaUi__Header--HelpIcon'} title={'?'}>
+                <MenuList>
+                  <MenuItem>About Idmsa LoginSystem</MenuItem>
+                </MenuList>
+              </Menu>
             </div>
 
             <div className={'App__IdmsaView--IdmsaUi__Content'}>

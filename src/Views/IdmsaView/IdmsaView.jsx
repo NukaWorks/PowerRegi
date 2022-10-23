@@ -9,7 +9,13 @@ export default function IdmsaView() {
   const fldPassword = createRef()
 
   useEffect(() => {
-    console.log({fldUsername, fldPassword})
+    fldUsername.current.addEventListener('input', e => {
+      if ((e.target.value.length > 0)) {
+        setFormDisabled(false)
+      } else {
+        setFormDisabled(true)
+      }
+    })
   }, [])
 
   return (

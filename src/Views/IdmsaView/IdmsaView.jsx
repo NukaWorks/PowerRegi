@@ -18,8 +18,17 @@ export default function IdmsaView() {
 
             <div className={'App__IdmsaView--IdmsaUi__Content'}>
               <div className={'App__IdmsaView--IdmsaUi__Content--Fields'}>
-                <TextField type={'text'} placeholder={'Username'}/>
-                <TextField type={'password'} placeholder={'Password'}/>
+                <TextField
+                    className={'App__IdmsaView--IdmsaUi__Content--Fields__Field'}
+                    type={'text'}
+                    placeholder={'Username'}
+                />
+
+                <TextField
+                    className={'App__IdmsaView--IdmsaUi__Content--Fields__Field'}
+                    type={'password'}
+                    placeholder={'Password'}
+                />
               </div>
 
               <div className={'App__IdmsaView--IdmsaUi__Content--Controls'}>

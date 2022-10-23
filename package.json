@@ -3,6 +3,7 @@
   "commercial_name": "PowerRegi",
   "version": "0.1.0",
   "private": true,
+  "repository": "https://github.com/NukaWorks/PowerRegi",
   "license": "MIT",
   "scripts": {
     "dev:webui": "vite",

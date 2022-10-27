@@ -67,13 +67,13 @@ export default function IdmsaView() {
             </form>
 
             <div className={'App__IdmsaView--IdmsaUi__Footer'}>
-              <p className={'App__IdmsaView--IdmsaUi__Footer--InstanceLocation'}>
-                <code>regi.nuka.works</code>
-              </p>
+              <code className={'App__IdmsaView--IdmsaUi__Footer--InstanceLocation'}>
+                regi.nuka.works
+              </code>
 
-              <p className={'App__IdmsaView--IdmsaUi__Footer--AppVersion'}>
-                <code>{commercial_name} {version}</code>
-              </p>
+              <code className={'App__IdmsaView--IdmsaUi__Footer--AppVersion'}>
+                {commercial_name} {version}
+              </code>
             </div>
           </div>
         </div>

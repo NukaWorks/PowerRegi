@@ -2,7 +2,7 @@ import { AppActivity, AppHeader, Menu, MenuBar, MenuItem, MenuList, Spinner, UiA
 import { commercial_name } from '../package.json'
 import React, { useEffect } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import Home from './Views/Overview/HomeView'
+import Home from './Views/HomeView/HomeView'
 import ConsoleMgmt from './Views/ConsoleMgmt/ConsoleMgmt'
 import ErrorView from './Views/ErrorView/ErrorView'
 import ErrorTypes from './Common/Misc/ErrorTypes'

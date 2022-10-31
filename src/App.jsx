@@ -11,6 +11,7 @@ import SettingsView from './Views/SettingsView/SettingsView'
 
 export default function App() {
   const [loading, setLoading] = React.useState(true)
+  const [loggedIn, setLoggedIn] = React.useState(false)
 
   useEffect(() => {
     setLoading(false)
@@ -58,7 +59,11 @@ export default function App() {
                 <Routes>
                   <Route path={'/'} element={<Navigate replace to={'/home'} />} />
                   <Route caseSensitive path="/idmsa" element={<IdmsaView />}/>
-                  <Route caseSensitive path="/home" element={<Home/>}/>
+                  <Route
+                      caseSensitive
+                      path="/home"
+                      element={loggedIn ? <Home/> : <Navigate replace to={`/idmsa?referrer=${document.referrer}`}/>}
+                  />
                   <Route caseSensitive path={'/console'} element={<ConsoleMgmt/>}/>
                   <Route caseSensitive path={'/settings'} element={<SettingsView />}/>
 

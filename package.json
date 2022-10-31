@@ -9,8 +9,9 @@
     "dev:webui": "vite",
     "dev:server": "nodemon ./src/Server/server.js",
     "build:webui": "vite build",
+    "build:server": "esbuild ./src/Server/server.js --bundle --minify --platform=node --target=node16 --outfile=dist/server.js",
     "start:server": "pm2 start ./src/Server/server.js -i -1",
-    "start:webui": "pm2 start ./src/Server/webui.js"
+    "start:webui": "pm2 start src/Server/Services/WebUi/webui.js"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^2.1.0",
+    "esbuild": "^0.15.12",
     "eslint": "8.23.0",
     "eslint-config-next": "12.3.0",
     "nodemon": "^2.0.20",

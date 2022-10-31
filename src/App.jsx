@@ -62,7 +62,12 @@ export default function App() {
                   <Route
                       caseSensitive
                       path="/home"
-                      element={loggedIn ? <Home/> : <Navigate replace to={`/idmsa?referrer=${document.referrer}`}/>}
+                      element={loggedIn
+                          ? <Home/>
+                          : <Navigate
+                              replace
+                              to={`/idmsa?redirect=${encodeURIComponent(document.location.pathname)}`}
+                          />}
                   />
                   <Route caseSensitive path={'/console'} element={<ConsoleMgmt/>}/>
                   <Route caseSensitive path={'/settings'} element={<SettingsView />}/>

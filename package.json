@@ -1,7 +1,7 @@
 {
-  "name": "@nukaworks/powerregi",
+  "name": "@nukaworks/regi",
   "commercial_name": "PowerRegi",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "repository": "https://github.com/NukaWorks/PowerRegi",
   "license": "MIT",

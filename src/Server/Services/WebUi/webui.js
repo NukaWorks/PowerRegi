@@ -17,11 +17,20 @@ async function startServer() {
   previewServer.printUrls()
 }
 
-startServer()
-    .then(() => {
-      console.log(`WebUi is started at port ${process.env.APP_WEBUI_PORT}`)
-    })
-    .catch(err => {
-      console.error(err)
-      process.exit(1)
-    })
+function start() {
+  startServer()
+      .then(() => {
+        console.log(`WebUi is started at port ${process.env.APP_WEBUI_PORT}`)
+        return 0
+      })
+      .catch(err => {
+        console.error(err)
+        return 1
+      })
+
+  return 0
+}
+
+function stop() {
+  return 0
+}

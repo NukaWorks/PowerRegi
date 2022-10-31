@@ -8,6 +8,7 @@
   "scripts": {
     "dev:webui": "vite",
     "dev:server": "nodemon ./src/Server/server.js",
+    "build:all": "rm -rf dist/ && npm run build:webui && npm run build:server && cp package.json dist/",
     "build:webui": "vite build",
     "build:server": "esbuild ./src/Server/server.js --bundle --minify --platform=node --target=node16 --outfile=dist/server.js",
     "start:server": "pm2 start ./src/Server/server.js -i -1",

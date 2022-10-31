@@ -68,7 +68,7 @@ export default function IdmsaView() {
 
             <div className={'App__IdmsaView--IdmsaUi__Footer'}>
               <code className={'App__IdmsaView--IdmsaUi__Footer--InstanceLocation'}>
-                regi.nuka.works
+                process.env.APP_FQDN
               </code>
 
               <code className={'App__IdmsaView--IdmsaUi__Footer--AppVersion'}>

@@ -7,6 +7,7 @@ import ConsoleMgmt from './Views/ConsoleMgmt/ConsoleMgmt'
 import ErrorView from './Views/ErrorView/ErrorView'
 import ErrorTypes from './Common/Misc/ErrorTypes'
 import IdmsaView from './Views/IdmsaView/IdmsaView'
+import SettingsView from './Views/SettingsView/SettingsView'
 
 export default function App() {
   const [loading, setLoading] = React.useState(true)
@@ -59,6 +60,8 @@ export default function App() {
                   <Route caseSensitive path="/idmsa" element={<IdmsaView />}/>
                   <Route caseSensitive path="/home" element={<Home/>}/>
                   <Route caseSensitive path={'/console'} element={<ConsoleMgmt/>}/>
+                  <Route caseSensitive path={'/settings'} element={<SettingsView />}/>
+
                   <Route path="*" element={<ErrorView errorCode={ErrorTypes['404']}/>}/>
                 </Routes>
               </BrowserRouter>

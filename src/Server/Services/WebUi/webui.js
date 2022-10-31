@@ -1,6 +1,8 @@
-/*
- * PowerRegi WebUI Server
- */
+////////////////////////////////
+//
+// PowerRegi WebUi Server
+//
+////////////////////////////////
 
 const { preview } = require('vite')
 require('dotenv').config()

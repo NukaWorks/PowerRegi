@@ -1,4 +1,4 @@
-const fs = require('fs')
+import fs from 'fs'
 
 let instance = null
 const popularDirs = [
@@ -26,10 +26,13 @@ class ConfigProvider {
   }
 }
 
-module.exports.getConfig = function getConfig() {
+function getConfig() {
   if (instance === null) {
     instance = new ConfigProvider()
   }
 
   return instance
 }
+
+const config = getConfig()
+export default config

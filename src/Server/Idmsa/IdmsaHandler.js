@@ -1,8 +1,9 @@
-const express = require('express')
+import express from 'express'
+import logger from 'electron-log'
 const idmsa = express.Router()
 
 // Setup Logging
-const log = require('electron-log').scope('idmsa')
+const log = logger.scope('idmsa')
 
 // Middleware that is specific to this router
 idmsa.use((req, res, next) => {

@@ -5,15 +5,16 @@
 ////////////////////////////////
 
 // Importing modules
-const express = require('express');
+const express = require('express')
+const axios = require('axios')
+const env = require('./../Common/Misc/ConfigProvider').getConfig()
 const chalk = require('chalk')
 const { commercial_name, version } = require('../../package.json')
 const idmsa = require('./Idmsa/IdmsaHandler')
 
 // Setup dotenv & express
-require('dotenv').config()
 const app = express();
-const port = process.env.APP_API_PORT;
+const port = env.APP_API_PORT;
 app.disable('x-powered-by');
 
 // Setup Logging
@@ -28,7 +29,7 @@ app.get('/', (req, res) => {
       'name': commercial_name,
       'version': version
     },
-    'domain': process.env.APP_FQDN
+    'domain': env.APP_FQDN
   })
 })
 

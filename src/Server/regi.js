@@ -5,20 +5,20 @@
 ////////////////////////////////
 
 // Importing modules
-const express = require('express')
-const axios = require('axios')
-const env = require('./../Common/Misc/ConfigProvider').getConfig()
-const chalk = require('chalk')
-const { commercial_name, version } = require('../../package.json')
-const idmsa = require('./Idmsa/IdmsaHandler')
-
+import express from 'express'
+import axios from 'axios'
+import chalk from 'chalk'
+import logger from 'electron-log'
+import { commercial_name, version } from '../../package.json'
+import idmsa from './Idmsa/IdmsaHandler'
+import env from '../Common/Misc/ConfigProvider'
 // Setup dotenv & express
 const app = express();
 const port = env.APP_API_PORT;
 app.disable('x-powered-by');
 
 // Setup Logging
-const log = require('electron-log').scope('main')
+const log = logger.scope('main')
 
 // Define Routes
 app.use('/idmsa', idmsa)

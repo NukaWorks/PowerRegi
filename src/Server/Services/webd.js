@@ -4,8 +4,8 @@
 //
 ////////////////////////////////
 
-const { preview } = require('vite')
-const env = require('./../../Common/Misc/ConfigProvider').getConfig()
+import { preview } from 'vite'
+import env from '../Common/Misc/ConfigProvider'
 
 async function startServer() {
   const previewServer = await preview({
@@ -22,7 +22,7 @@ async function startServer() {
 function start() {
   startServer()
       .then(() => {
-        console.log(`WebUi is started at port ${env.APP_WEBUI_PORT}`)
+        console.log(`WebUi is started at port ${'env.APP_WEBUI_PORT'}`)
         return 0
       })
       .catch(err => {

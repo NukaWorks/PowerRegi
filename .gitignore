@@ -37,4 +37,4 @@ next-env.d.ts
 *.iml
 .idea*
 /dist/
-!/.regi/
+/.regi/

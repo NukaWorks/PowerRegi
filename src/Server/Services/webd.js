@@ -5,13 +5,13 @@
 ////////////////////////////////
 
 const { preview } = require('vite')
-require('dotenv').config()
+const env = require('./../../Common/Misc/ConfigProvider').getConfig()
 
 async function startServer() {
   const previewServer = await preview({
     // any valid user config options, plus `mode` and `configFile`
     preview: {
-      port: process.env.APP_WEBUI_PORT,
+      port: env.APP_WEBUI_PORT,
       open: false,
     }
   })
@@ -22,7 +22,7 @@ async function startServer() {
 function start() {
   startServer()
       .then(() => {
-        console.log(`WebUi is started at port ${process.env.APP_WEBUI_PORT}`)
+        console.log(`WebUi is started at port ${env.APP_WEBUI_PORT}`)
         return 0
       })
       .catch(err => {

@@ -22,13 +22,15 @@ import axios from 'axios'
 export default function App() {
   const [loading, setLoading] = React.useState(true)
   const [loggedIn, setLoggedIn] = React.useState(false)
+  const [data, setData] = React.useState({})
 
   useEffect(() => {
     axios.get(`http://127.0.0.1:8081`).then(res => {
-      console.log(res.data)
+      setData(res.data)
       setLoading(false)
+      return data
     })
-  })
+  }, [])
 
   return (
       <AppActivity theme={'Light'}>
@@ -71,7 +73,7 @@ export default function App() {
               <BrowserRouter>
                 <Routes>
                   <Route path={'/'} element={<Navigate replace to={'/home'}/>}/>
-                  <Route caseSensitive path="/idmsa" element={<IdmsaView/>}/>
+                  <Route caseSensitive path="/idmsa" element={<IdmsaView data={data}/>}/>
                   <Route
                       caseSensitive
                       path="/home"

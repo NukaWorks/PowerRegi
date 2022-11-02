@@ -9,7 +9,8 @@ const previewCmd = 'node ./.regi/regi.js'
 async function startPreview(cmd) {
   const ps = await subp.exec(cmd, {
     maxBuffer: 2000 * 1024,
-    killSignal: 'SIGKILL'
+    killSignal: 'SIGKILL',
+    env: { ...process.env, FORCE_COLOR: '1' }
   }, (err, stdout, stderr)  => {
     if (err && stderr.length > 0) {
       log.error(`${chalk.bgRedBright.bold('Error')} ${stderr}`)

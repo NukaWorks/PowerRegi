@@ -41,6 +41,7 @@ async function main() {
         log.info(`${chalk.bgYellowBright.bold('Reloading')} changes detected`)
         if (error) {
           log.error(`${chalk.bgRedBright.bold('Error')} Build failed — ${error}`)
+          preview.kill('SIGKILL')
         }
         else {
           preview.kill('SIGKILL')

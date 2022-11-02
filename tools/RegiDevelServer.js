@@ -57,6 +57,4 @@ async function main() {
   })
 }
 
-main().then(() => {
-  log.info(`Regi-DevServer is ${chalk.green('ready')} !`)
-})
+main()

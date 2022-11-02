@@ -45,6 +45,5 @@ app.get('/', (req, res) => {
 
 // Start server
 app.listen(port, () => {
-  log.info(`${chalk.cyanBright.bold(commercial_name)} (${chalk.bold(version)}) is ${chalk.bgGreenBright.bold('UP')} to ${chalk.white.bold(env.APP_HOST)} and listening on port ${chalk.white.bold(port)}`)
+  log.info(`${chalk.cyanBright.bold(commercial_name)} (${chalk.bold(version)}) is ${chalk.bgGreenBright.bold('UP')} to ${chalk.white.bold(`${env.APP_HOST}:${chalk.white.bold(port)}`)}`)
 })
-

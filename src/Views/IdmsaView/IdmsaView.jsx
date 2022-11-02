@@ -3,7 +3,7 @@ import './IdmsaView.scss'
 import { Button, Link, Menu, MenuItem, MenuList, TextField } from '@powerws/uikit'
 import { commercial_name, version } from '../../../package.json'
 
-export default function IdmsaView() {
+export default function IdmsaView(props) {
   const [formDisabled, setFormDisabled] = React.useState(true)
   const fldUsername = createRef()
   const fldPassword = createRef()
@@ -68,7 +68,7 @@ export default function IdmsaView() {
 
             <div className={'App__IdmsaView--IdmsaUi__Footer'}>
               <code className={'App__IdmsaView--IdmsaUi__Footer--InstanceLocation'}>
-                process.env.APP_FQDN
+                { props.data.domain }
               </code>
 
               <code className={'App__IdmsaView--IdmsaUi__Footer--AppVersion'}>

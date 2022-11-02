@@ -20,16 +20,22 @@ import SettingsView from './Views/SettingsView/SettingsView'
 import axios from 'axios'
 
 export default function App() {
-  const [loading, setLoading] = React.useState(true)
+  // Available applicationStates: 'loading', 'crashed', 'done'.
+  const [applicationState, setApplicationState] = React.useState({state: 'loading'})
   const [loggedIn, setLoggedIn] = React.useState(false)
   const [data, setData] = React.useState({})
 
   useEffect(() => {
-    axios.get(`http://127.0.0.1:8081`).then(res => {
-      setData(res.data)
-      setLoading(false)
-      return data
-    })
+    axios.get(`http://127.0.0.1:8081`)
+        .then(res => {
+          setData(res.data)
+          setApplicationState({state: 'done'})
+          return data
+        })
+        .catch(err => {
+          console.error("Backend syncing error, " + ErrorTypes['500'])
+          setApplicationState({state: 'crashed'})
+        })
   }, [])
 
   return (
@@ -64,32 +70,37 @@ export default function App() {
           </MenuBar>
         </AppHeader>
 
-        {loading ? (
+        {applicationState.state === 'loading' ? (
             <div className={'App__LoadingScreen'}>
               <Spinner size={'Large'} color={'Blue'}/>
             </div>
         ) : (
             <UiApp rounded>
-              <BrowserRouter>
-                <Routes>
-                  <Route path={'/'} element={<Navigate replace to={'/home'}/>}/>
-                  <Route caseSensitive path="/idmsa" element={<IdmsaView data={data}/>}/>
-                  <Route
-                      caseSensitive
-                      path="/home"
-                      element={loggedIn
-                          ? <Home/>
-                          : <Navigate
-                              replace
-                              to={`/idmsa?redirect=${encodeURIComponent(document.location.pathname)}`}
-                          />}
-                  />
-                  <Route caseSensitive path={'/console'} element={<ConsoleMgmt/>}/>
-                  <Route caseSensitive path={'/settings'} element={<SettingsView/>}/>
 
-                  <Route path="*" element={<ErrorView errorCode={ErrorTypes['404']}/>}/>
-                </Routes>
-              </BrowserRouter>
+              {applicationState.state === 'crashed' ? (
+                  <ErrorView errorCode={ErrorTypes['500']}/>
+              ) : (
+                  <BrowserRouter>
+                    <Routes>
+                      <Route path={'/'} element={<Navigate replace to={'/home'}/>}/>
+                      <Route caseSensitive path="/idmsa" element={<IdmsaView data={data}/>}/>
+                      <Route
+                          caseSensitive
+                          path="/home"
+                          element={loggedIn
+                              ? <Home/>
+                              : <Navigate
+                                  replace
+                                  to={`/idmsa?redirect=${encodeURIComponent(document.location.pathname)}`}
+                              />}
+                      />
+                      <Route caseSensitive path={'/console'} element={<ConsoleMgmt/>}/>
+                      <Route caseSensitive path={'/settings'} element={<SettingsView/>}/>
+
+                      <Route path="*" element={<ErrorView errorCode={ErrorTypes['404']}/>}/>
+                    </Routes>
+                  </BrowserRouter>
+              )}
             </UiApp>
         )}
       </AppActivity>

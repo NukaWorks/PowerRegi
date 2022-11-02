@@ -24,7 +24,10 @@ export default function App() {
   const [loggedIn, setLoggedIn] = React.useState(false)
 
   useEffect(() => {
-    setLoading(false)
+    axios.get(`http://127.0.0.1:8081`).then(res => {
+      console.log(res.data)
+      setLoading(false)
+    })
   })
 
   return (

@@ -20,6 +20,7 @@ app.disable('x-powered-by')
 
 // Setup Logging
 const log = logger.scope('main')
+logger.transports.console.level = 'debug'
 
 // Define Routes
 app.use(function(req, res, next) {
@@ -39,7 +40,8 @@ app.get('/', (req, res) => {
   res.send({
     'build': {
       'name': commercial_name, 'version': version
-    }, 'domain': env.APP_HOST
+    },
+    'domain': env.APP_HOST
   })
 })
 

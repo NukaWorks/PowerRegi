@@ -3,13 +3,14 @@ import os from 'os'
 import logger from 'electron-log'
 import chalk from 'chalk'
 
-const log = logger.scope('main')
+const log = logger.scope('ConfigProvider')
 
 let instance = null
 const popularDirs = [
   './',
   '../../',
-  'dist/'
+  'dist/',
+  'public/'
 ]
 
 const defaultConfig = {
@@ -29,7 +30,7 @@ function fetchConfig() {
 
   for (const key in defaultConfig) {
     if (!runningConfig.hasOwnProperty(key)) {
-      log.warn(`Config is missing key: ${chalk.white.bold(key)}, using default`)
+      log.warn(`ExternalConfig is missing key: ${chalk.white.bold(key)}, using default`)
       runningConfig[key] = defaultConfig[key]
     }
   }

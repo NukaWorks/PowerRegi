@@ -6,7 +6,6 @@
 
 // Importing modules
 import express from 'express'
-import axios from 'axios'
 import chalk from 'chalk'
 import logger from 'electron-log'
 import { commercial_name, version } from '../../package.json'
@@ -14,14 +13,14 @@ import idmsa from './Idmsa/IdmsaHandler'
 import env from '../Common/Misc/ConfigProvider'
 import mongoose from 'mongoose'
 
+// Setup Logging
+const log = logger.scope('Regi')
+logger.transports.console.level = 'debug'
+
 // Setup dotenv & express
 const app = express()
 const port = env.APP_API_PORT
 app.disable('x-powered-by')
-
-// Setup Logging
-const log = logger.scope('Regi')
-logger.transports.console.level = 'debug'
 
 // Define Routes
 app.use(function(req, res, next) {

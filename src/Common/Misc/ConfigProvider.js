@@ -16,7 +16,8 @@ const popularDirs = [
 const defaultConfig = {
   'APP_HOST': os.hostname(),
   'APP_WEBUI_PORT': 8080,
-  'APP_API_PORT': 8081
+  'APP_API_PORT': 8081,
+  'APP_DB_URI': 'mongodb://localhost:27017/regi',
 }
 
 function fetchConfig() {

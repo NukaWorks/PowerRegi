@@ -19,7 +19,7 @@ const port = env.APP_API_PORT
 app.disable('x-powered-by')
 
 // Setup Logging
-const log = logger.scope('main')
+const log = logger.scope('Regi')
 logger.transports.console.level = 'debug'
 
 // Define Routes
@@ -27,6 +27,8 @@ app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Methods', 'DELETE, PUT')
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  log.verbose(`${chalk.bgGreenBright.bold(req.method)} ${req.url} (${chalk.bold(req.ip)} - ${chalk.grey(req.headers['user-agent'])})`)
+
   if ('OPTIONS' === req.method) {
     res.sendStatus(200)
   } else {
@@ -44,6 +46,7 @@ app.get('/', (req, res) => {
     'domain': env.APP_HOST
   })
 })
+
 
 // Start server
 app.listen(port, () => {

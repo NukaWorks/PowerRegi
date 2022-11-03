@@ -30,7 +30,7 @@ async function main() {
   require('esbuild').build({
     entryPoints: ['./src/Server/regi.js'],
     bundle: true,
-    minify: true,
+    minify: false,
     outfile: './.regi/regi.js',
     platform: 'node',
     logLevel: 'info',

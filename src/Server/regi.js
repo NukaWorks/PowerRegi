@@ -23,15 +23,6 @@ app.disable('x-powered-by')
 const log = logger.scope('Regi')
 logger.transports.console.level = 'debug'
 
-// Define Database related stuff
-async function dbConnect(dbUri) {
-  return await mongoose.connect(dbUri)
-}
-
-dbConnect(env.APP_DB_URI).then(result => {
-  log.info(`${chalk.green.bold('Successfully')} connected to ${chalk.white.bold(result.connection.name)} ${chalk.grey(`(${result.connection.host})`)} database !`)
-})
-
 // Define Routes
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
@@ -57,7 +48,16 @@ app.get('/', (req, res) => {
   })
 })
 
-// Start server
-app.listen(port, () => {
-  log.info(`${chalk.cyanBright.bold(commercial_name)} (${chalk.bold(version)}) is ${chalk.bgGreenBright.bold('UP')} to ${chalk.white.bold(`${env.APP_HOST}:${chalk.white.bold(port)}`)}`)
-})
+// Define Database and Start the server
+mongoose.connect(env.APP_DB_URI)
+    .then(result => {
+      log.info(`${chalk.green.bold('Successfully')} connected to ${chalk.white.bold(result.connection.name)} ${chalk.grey(`(${result.connection.host})`)} database !`)
+
+      // Start server
+      app.listen(port, () => {
+        log.info(`${chalk.cyanBright.bold(commercial_name)} (${chalk.bold(version)}) is ${chalk.bgGreenBright.bold('UP')} to ${chalk.white.bold(`${env.APP_HOST}:${chalk.white.bold(port)}`)}`)
+      })
+    })
+    .catch(err => {
+      log.error(`${chalk.red.bold('Failed')} to connect to database :/ \n ${chalk.red(err)}`)
+    })

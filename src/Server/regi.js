@@ -12,6 +12,7 @@ import logger from 'electron-log'
 import { commercial_name, version } from '../../package.json'
 import idmsa from './Idmsa/IdmsaHandler'
 import env from '../Common/Misc/ConfigProvider'
+import mongoose from 'mongoose'
 
 // Setup dotenv & express
 const app = express()
@@ -21,6 +22,15 @@ app.disable('x-powered-by')
 // Setup Logging
 const log = logger.scope('Regi')
 logger.transports.console.level = 'debug'
+
+// Define Database related stuff
+async function dbConnect(dbUri) {
+  return await mongoose.connect(dbUri)
+}
+
+dbConnect(env.APP_DB_URI).then(result => {
+  log.info(`${chalk.green.bold('Successfully')} connected to ${chalk.white.bold(result.connection.name)} ${chalk.grey(`(${result.connection.host})`)} database !`)
+})
 
 // Define Routes
 app.use(function(req, res, next) {
@@ -46,7 +56,6 @@ app.get('/', (req, res) => {
     'domain': env.APP_HOST
   })
 })
-
 
 // Start server
 app.listen(port, () => {

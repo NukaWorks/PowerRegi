@@ -48,15 +48,20 @@ app.get('/', (req, res) => {
 })
 
 // Define Database and Start the server
-mongoose.connect(env.APP_DB_URI)
-    .then(result => {
-      log.info(`${chalk.green.bold('Successfully')} connected to ${chalk.white.bold(result.connection.name)} ${chalk.grey(`(${result.connection.host})`)} database !`)
+function start() {
+  log.log(`Starting ${chalk.bold(commercial_name)} ${chalk.grey(`(${version})`)}...`)
+  mongoose.connect(env.APP_DB_URI)
+      .then(result => {
+        log.info(`${chalk.green.bold('Successfully')} connected to ${chalk.white.bold(result.connection.name)} ${chalk.grey(`(${result.connection.host})`)} database !`)
 
-      // Start server
-      app.listen(port, () => {
-        log.info(`${chalk.cyanBright.bold(commercial_name)} (${chalk.bold(version)}) is ${chalk.bgGreenBright.bold('UP')} to ${chalk.white.bold(`${env.APP_HOST}:${chalk.white.bold(port)}`)}`)
+        // Start server
+        app.listen(port, () => {
+          log.info(`${chalk.cyanBright.bold(commercial_name)} (${chalk.bold(version)}) is ${chalk.bgGreenBright.bold('UP')} to ${chalk.white.bold(`${env.APP_HOST}:${chalk.white.bold(port)}`)}`)
+        })
       })
-    })
-    .catch(err => {
-      log.error(`${chalk.red.bold('Failed')} to connect to database :/ \n ${chalk.red(err)}`)
-    })
+      .catch(err => {
+        log.error(`${chalk.red.bold('Failed')} to connect to database :/ \n ${chalk.red(err)}`)
+      })
+}
+
+start()

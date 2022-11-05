@@ -12,6 +12,7 @@ import { commercial_name, version } from '../../package.json'
 import idmsa from './Idmsa/IdmsaHandler'
 import env from '../Common/Misc/ConfigProvider'
 import mongoose from 'mongoose'
+import { User, UserModel } from './Database/Objects/User'
 
 // Setup Logging
 const log = logger.scope('Regi')
@@ -51,8 +52,27 @@ app.get('/', (req, res) => {
 function start() {
   log.log(`Starting ${chalk.bold(commercial_name)} ${chalk.grey(`(${version})`)}...`)
   mongoose.connect(env.APP_DB_URI)
-      .then(result => {
+      .then(async result => {
         log.info(`${chalk.green.bold('Successfully')} connected to ${chalk.white.bold(result.connection.name)} ${chalk.grey(`(${result.connection.host})`)} database !`)
+
+        // Checks if the database is empty and if so, creates the default admin user
+        await UserModel.findOne({name: 'root'}).then(result => {
+          if (!result) {
+            const defaultUser = new User().makeDefaultUser()
+                .then(user => {
+                  log.log(`Default user ${chalk.bold(user.name)} created !`)
+                  console.log(user)
+                  user.save()
+                      .then(() => {
+                        log.log('Default user created !') //TODO: Review this log
+                      })
+                      .catch(err => log.log(err))
+                })
+                .catch(err => {
+                  log.error(err)
+                })
+          }
+        })
 
         // Start server
         app.listen(port, () => {
@@ -60,7 +80,7 @@ function start() {
         })
       })
       .catch(err => {
-        log.error(`${chalk.red.bold('Failed')} to connect to database :/ \n ${chalk.red(err)}`)
+        log.error(`${chalk.red.bold('Failed')} to connect to database :/ \n${chalk.red(err)}`)
       })
 }
 

@@ -7,6 +7,8 @@ const esbuild = require('esbuild')
 
 const previewCmd = 'node ./.regi/regi.js'
 
+let previewProcess = {}
+
 async function startPreview(cmd) {
   const ps = await subp.exec(cmd, {
     maxBuffer: 2000 * 1024,
@@ -20,7 +22,6 @@ async function startPreview(cmd) {
 }
 
 function main() {
-  let previewProcess = null
   const buildParams = {
     entryPoints: ['./src/Server/regi.js'],
     bundle: true,
@@ -34,22 +35,28 @@ function main() {
         log.info(`${chalk.bgYellowBright.bold('Reloading')} changes detected`)
         if (error) {
           log.error(`${chalk.bgRedBright.bold('Error')} Build failed — ${error}`)
-          previewProcess.kill('SIGKILL')
+          startPreview(previewCmd).then(ps => {
+            previewProcess = ps
+          })
         } else {
           previewProcess.kill('SIGKILL')
-          previewProcess = await startPreview(previewCmd)
+          startPreview(previewCmd).then(ps => {
+            previewProcess = ps
+          })
         }
       },
     },
   }
 
   esbuild.build(buildParams).then(() => {
-    previewProcess = startPreview(previewCmd)
+    startPreview(previewCmd).then(ps => {
+        previewProcess = ps
+    })
     log.info(`Regi-DevServer is ${chalk.green('watching')} !`)
   })
 
   process.on('exit', () => {
-    previewProcess.kill('SIGKILL')
+    previewProcess.ps.kill('SIGKILL')
   })
 }
 

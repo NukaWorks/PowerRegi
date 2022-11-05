@@ -47,7 +47,7 @@ async function startPreview(cmd) {
   return ps
 }
 
-async function main() {
+function main() {
   esbuild.build(buildParams).then(() => {
     previewProcess = startPreview(previewCmd)
     log.info(`Regi-DevServer is ${chalk.green('watching')} !`)

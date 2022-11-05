@@ -34,16 +34,10 @@ async function startPreview(cmd) {
     maxBuffer: 2000 * 1024,
     killSignal: 'SIGKILL',
     env: {...process.env, FORCE_COLOR: '1'}
-  }, (err, stdout, stderr) => {
-    if (err && stderr.length >= 0) {
-      console.error(`${stderr}`)
-    }
   })
 
-  ps.stdout.on('data', (data) => {
-    console.log(data)
-  })
-
+  ps.stdout.on('data', data => process.stdout.write(data))
+  ps.stderr.on('data', data => process.stderr.write(data))
   return ps
 }
 

@@ -6,28 +6,6 @@ const log = require('electron-log').scope('Regi-DevServer')
 const esbuild = require('esbuild')
 
 const previewCmd = 'node ./.regi/regi.js'
-let previewProcess = null
-const buildParams = {
-  entryPoints: ['./src/Server/regi.js'],
-  bundle: true,
-  minify: false,
-  outfile: './.regi/regi.js',
-  platform: 'node',
-  logLevel: 'info',
-  target: 'node16',
-  watch: {
-    async onRebuild(error, result) {
-      log.info(`${chalk.bgYellowBright.bold('Reloading')} changes detected`)
-      if (error) {
-        log.error(`${chalk.bgRedBright.bold('Error')} Build failed — ${error}`)
-        previewProcess.kill('SIGKILL')
-      } else {
-        previewProcess.kill('SIGKILL')
-        previewProcess = await startPreview(previewCmd)
-      }
-    },
-  },
-}
 
 async function startPreview(cmd) {
   const ps = await subp.exec(cmd, {
@@ -42,6 +20,29 @@ async function startPreview(cmd) {
 }
 
 function main() {
+  let previewProcess = null
+  const buildParams = {
+    entryPoints: ['./src/Server/regi.js'],
+    bundle: true,
+    minify: false,
+    outfile: './.regi/regi.js',
+    platform: 'node',
+    logLevel: 'info',
+    target: 'node16',
+    watch: {
+      async onRebuild(error, result) {
+        log.info(`${chalk.bgYellowBright.bold('Reloading')} changes detected`)
+        if (error) {
+          log.error(`${chalk.bgRedBright.bold('Error')} Build failed — ${error}`)
+          previewProcess.kill('SIGKILL')
+        } else {
+          previewProcess.kill('SIGKILL')
+          previewProcess = await startPreview(previewCmd)
+        }
+      },
+    },
+  }
+
   esbuild.build(buildParams).then(() => {
     previewProcess = startPreview(previewCmd)
     log.info(`Regi-DevServer is ${chalk.green('watching')} !`)

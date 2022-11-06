@@ -3,18 +3,25 @@ import { UserSchema } from '../Schemas/UserSchema'
 
 const UserModel = mongoose.model('User', UserSchema)
 
-export class User {
-  async makeDefaultUser() {
-    const data = {name: 'root'}
-
-    if (await UserModel.findOne({name: data.name})) {
-      throw new Error('User already exists')
-    } else return new UserModel(data)
+class User {
+  constructor(user) {
+    this.model = user
   }
 
-  async makeUser(userModel) {
-    return new UserModel(userModel)
+  async build() {
+    if (! await UserModel.findOne({name: this.model.name})) {
+      this.model = new UserModel(this.model)
+
+      return this.model.save().then(model => {
+        return model
+      })
+    } else throw new Error('User already exists')
   }
 }
 
-export { UserModel }
+function makeDefaultUser() {
+  const data = {name: 'root'}
+  return new User(data)
+}
+
+export { User, UserModel, makeDefaultUser }

@@ -5,9 +5,9 @@ const UserModel = mongoose.model('User', UserSchema)
 
 export class User {
   async makeDefaultUser() {
-    const data = { name: 'root' }
+    const data = {name: 'root'}
 
-    if ( await UserModel.findOne({name: data.name})) {
+    if (await UserModel.findOne({name: data.name})) {
       throw new Error('User already exists')
     } else return new UserModel(data)
   }

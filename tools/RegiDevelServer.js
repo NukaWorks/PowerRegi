@@ -9,14 +9,15 @@ const {stdin: input, stdout: output} = require('node:process')
 
 const rl = readline.createInterface({input, output})
 const previewCmd = 'node ./.regi/regi.js'
+const psParams = {
+  maxBuffer: 2000 * 1024,
+  killSignal: 'SIGKILL',
+  env: {...process.env, FORCE_COLOR: '1'}
+}
 let previewProcess = {}
 
 async function startPreview(cmd) {
-  const ps = await subp.exec(cmd, {
-    maxBuffer: 2000 * 1024,
-    killSignal: 'SIGKILL',
-    env: {...process.env, FORCE_COLOR: '1'}
-  })
+  const ps = await subp.exec(cmd, psParams)
 
   ps.stdout.on('data', data => process.stdout.write(data))
   ps.stderr.on('data', data => process.stderr.write(data))
@@ -50,7 +51,7 @@ async function main() {
     },
   }
 
-  const build = await esbuild.build(buildParams).then(() => {
+  await esbuild.build(buildParams).then(() => {
     startPreview(previewCmd).then(ps => {
       previewProcess.ps = ps
     })
@@ -60,7 +61,7 @@ async function main() {
     })
 
     rl.on('line', (input) => {
-      if (input.match('rs')) {
+      if (input.match('^rs$')) {
         previewProcess.ps.kill('SIGKILL')
         startPreview(previewCmd).then(ps => {
           previewProcess.ps = ps

@@ -5,6 +5,7 @@ import { UserSchema } from '../Schemas/UserSchema'
 const saltRounds = 10
 const UserModel = mongoose.model('User', UserSchema)
 
+//NOTE: A user need to be associated with a group to be able to login (users)
 class User {
   constructor(user) {
     this.model = user

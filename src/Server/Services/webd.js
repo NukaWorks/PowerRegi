@@ -5,7 +5,7 @@
 ////////////////////////////////
 
 import { preview } from 'vite'
-import env from '../Common/Misc/ConfigProvider'
+import env from '../../Common/Misc/ConfigProvider'
 
 async function startServer() {
   const previewServer = await preview({

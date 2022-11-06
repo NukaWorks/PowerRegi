@@ -9,13 +9,29 @@ class User {
   }
 
   async build() {
-    if (! await UserModel.findOne({name: this.model.name})) {
+    if (!await UserModel.findOne({name: this.model.name})) {
       this.model = new UserModel(this.model)
 
       return this.model.save().then(model => {
         return model
       })
     } else throw new Error('User already exists')
+  }
+
+  async update(data) {
+    if (await UserModel.findOne({name: this.model.name})) {
+      return UserModel.findOneAndUpdate({name: this.model.name}, data).then(model => {
+        this.model = model
+
+        return model.save().then(model => {
+          return model
+        }).catch(err => {
+          throw err
+        })
+      }).catch(err => {
+        throw err
+      })
+    } else throw new Error('User not found')
   }
 }
 

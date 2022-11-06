@@ -65,6 +65,7 @@ async function main() {
         previewProcess.ps.kill('SIGKILL')
         startPreview(previewCmd).then(ps => {
           previewProcess.ps = ps
+          log.info(`${chalk.bgGreenBright.bold('Restarted')} !`)
         })
       }
     })

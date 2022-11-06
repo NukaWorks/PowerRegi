@@ -42,7 +42,7 @@ async function main() {
             previewProcess.ps = ps
           })
         } else {
-          previewProcess.kill('SIGKILL')
+          previewProcess.ps.kill('SIGKILL')
           startPreview(previewCmd).then(ps => {
             previewProcess.ps = ps
           })

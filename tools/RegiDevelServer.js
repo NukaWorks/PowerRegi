@@ -1,12 +1,14 @@
 // commonjs
 
 const subp = require('child_process')
+const readline = require('readline')
 const chalk = require('chalk')
 const log = require('electron-log').scope('Regi-DevServer')
 const esbuild = require('esbuild')
+const {stdin: input, stdout: output} = require('node:process')
 
+const rl = readline.createInterface({input, output})
 const previewCmd = 'node ./.regi/regi.js'
-
 let previewProcess = {}
 
 async function startPreview(cmd) {
@@ -21,7 +23,7 @@ async function startPreview(cmd) {
   return ps
 }
 
-function main() {
+async function main() {
   const buildParams = {
     entryPoints: ['./src/Server/regi.js'],
     bundle: true,
@@ -36,27 +38,37 @@ function main() {
         if (error) {
           log.error(`${chalk.bgRedBright.bold('Error')} Build failed — ${error}`)
           startPreview(previewCmd).then(ps => {
-            previewProcess = ps
+            previewProcess.ps = ps
           })
         } else {
           previewProcess.kill('SIGKILL')
           startPreview(previewCmd).then(ps => {
-            previewProcess = ps
+            previewProcess.ps = ps
           })
         }
       },
     },
   }
 
-  esbuild.build(buildParams).then(() => {
+  const build = await esbuild.build(buildParams).then(() => {
     startPreview(previewCmd).then(ps => {
-        previewProcess = ps
+      previewProcess.ps = ps
     })
-    log.info(`Regi-DevServer is ${chalk.green('watching')} !`)
-  })
 
-  process.on('exit', () => {
-    previewProcess.ps.kill('SIGKILL')
+    process.on('exit', () => {
+      previewProcess.ps.kill('SIGKILL')
+    })
+
+    rl.on('line', (input) => {
+      if (input.match('rs')) {
+        previewProcess.ps.kill('SIGKILL')
+        startPreview(previewCmd).then(ps => {
+          previewProcess.ps = ps
+        })
+      }
+    })
+
+    log.info(`Regi-DevServer is ${chalk.green('watching')} !`)
   })
 }
 

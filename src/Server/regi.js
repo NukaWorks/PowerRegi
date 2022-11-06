@@ -44,7 +44,8 @@ app.get('/', (req, res) => {
     'build': {
       'name': commercial_name, 'version': version
     },
-    'domain': env.APP_HOST
+    'domain': env.APP_HOST,
+    'server': `${commercial_name} ${version}`,
   })
 })
 

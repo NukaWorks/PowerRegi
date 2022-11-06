@@ -11,7 +11,7 @@ const rl = readline.createInterface({input, output})
 const previewCmd = 'node ./.regi/regi.js'
 const psParams = {
   maxBuffer: 2000 * 1024,
-  killSignal: 'SIGKILL',
+  killSignal: 'SIGTERM',
   env: {...process.env, FORCE_COLOR: '1'}
 }
 let previewProcess = {}
@@ -42,7 +42,7 @@ async function main() {
             previewProcess.ps = ps
           })
         } else {
-          previewProcess.ps.kill('SIGKILL')
+          previewProcess.ps.kill('SIGTERM')
           startPreview(previewCmd).then(ps => {
             previewProcess.ps = ps
           })
@@ -57,12 +57,12 @@ async function main() {
     })
 
     process.on('exit', () => {
-      previewProcess.ps.kill('SIGKILL')
+      previewProcess.ps.kill('SIGTERM')
     })
 
     rl.on('line', (input) => {
       if (input.match('^rs$')) {
-        previewProcess.ps.kill('SIGKILL')
+        previewProcess.ps.kill('SIGTERM')
         startPreview(previewCmd).then(ps => {
           previewProcess.ps = ps
           log.info(`${chalk.bgGreenBright.bold('Restarted')} !`)

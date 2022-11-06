@@ -60,7 +60,7 @@ function start() {
           if (!result) {
             makeDefaultUser().build()
                 .then(user => {
-                  log.log(`Default user ${chalk.bold(user.name)} created !`)
+                  log.info(`Default user ${chalk.bold(user.name)} created !`)
                 })
                 .catch(err => {
                   log.error(err)

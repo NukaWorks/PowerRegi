@@ -49,33 +49,37 @@ app.get('/', (req, res) => {
 })
 
 // Define Database and Start the Server
-function start() {
+async function start() {
   log.log(`Starting ${chalk.bold(commercial_name)} ${chalk.grey(`(${version})`)}...`)
-  mongoose.connect(env.APP_DB_URI)
-      .then(async result => {
+  await mongoose.connect(env.APP_DB_URI)
+      .then(result => {
         log.info(`${chalk.green.bold('Successfully')} connected to ${chalk.white.bold(result.connection.name)} ${chalk.grey(`(${result.connection.host})`)} database !`)
-
-        // Checks if the database is empty and if so, creates the default admin user
-        await UserModel.findOne({name: 'root'}).then(result => {
-          if (!result) {
-            makeDefaultUser().build()
-                .then(user => {
-                  log.info(`Default user ${chalk.bold(user.name)} created !`)
-                })
-                .catch(err => {
-                  log.error(err)
-                })
-          }
-        })
-
-        // Start server
-        app.listen(port, () => {
-          log.info(`${chalk.cyanBright.bold(commercial_name)} (${chalk.bold(version)}) is ${chalk.bgGreenBright.bold('UP')} to ${chalk.white.bold(`${env.APP_HOST}:${chalk.white.bold(port)}`)}`)
-        })
       })
       .catch(err => {
         log.error(`${chalk.red.bold('Failed')} to connect to database :/ \n${chalk.red(err)}`)
+        throw err
       })
+
+  // Checks if the database is empty and if so, creates the default admin user
+  await UserModel.findOne({name: 'root'}).then(async result => {
+    if (!result) {
+      await makeDefaultUser().build()
+          .then(user => {
+            log.info(`Default user ${chalk.bold(user.name)} created !`)
+          })
+          .catch(err => {
+            log.error(err)
+          })
+    }
+  })
 }
 
-start()
+start().then(() => {
+  // Start server
+  app.listen(port, () => {
+    log.info(`${chalk.cyanBright.bold(commercial_name)} (${chalk.bold(version)}) is ${chalk.bgGreenBright.bold('UP')} to ${chalk.white.bold(`${env.APP_HOST}:${chalk.white.bold(port)}`)}`)
+  })
+}).catch(err => {
+  log.error(err)
+  throw err
+})

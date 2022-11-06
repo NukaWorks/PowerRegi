@@ -18,6 +18,7 @@ const defaultConfig = {
   'APP_WEBUI_PORT': 8080,
   'APP_API_PORT': 8081,
   'APP_DB_URI': 'mongodb://localhost:27017/regi',
+  'APP_LOG_LEVEL': 'debug',
 }
 
 function fetchConfig() {

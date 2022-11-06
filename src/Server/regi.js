@@ -16,7 +16,7 @@ import { User, UserModel, makeDefaultUser } from './Database/Objects/User'
 
 // Setup Logging
 const log = logger.scope('Regi')
-logger.transports.console.level = 'debug'
+logger.transports.console.level = env.APP_LOG_LEVEL
 
 // Setup dotenv & express
 const app = express()

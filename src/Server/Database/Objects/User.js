@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import bcrypt from 'bcryptjs'
 import { UserSchema } from '../Schemas/UserSchema'
 
-const saltRounds = 10;
+const saltRounds = 10
 const UserModel = mongoose.model('User', UserSchema)
 
 class User {
@@ -15,14 +15,17 @@ class User {
   }
 
   async build() {
-    if (!await UserModel.findOne({name: this.model.name})) {
+    const uModel = await UserModel.findOne({name: this.model.name})
+    if (!uModel) {
       this.model = new UserModel(this.model)
       this.model.passwd = await this.generateHash(this.model.passwd)
 
       return this.model.save().then(model => {
         return model
       })
-    } else throw new Error('User already exists')
+    } else {
+      this.model = uModel
+    }
   }
 
   async update(data) {

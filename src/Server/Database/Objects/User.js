@@ -1,6 +1,8 @@
 import mongoose from 'mongoose'
+import bcrypt from 'bcryptjs'
 import { UserSchema } from '../Schemas/UserSchema'
 
+const saltRounds = 10;
 const UserModel = mongoose.model('User', UserSchema)
 
 class User {
@@ -8,9 +10,14 @@ class User {
     this.model = user
   }
 
+  async generateHash(password) {
+    return await bcrypt.hash(password, saltRounds)
+  }
+
   async build() {
     if (!await UserModel.findOne({name: this.model.name})) {
       this.model = new UserModel(this.model)
+      this.model.passwd = await this.generateHash(this.model.passwd)
 
       return this.model.save().then(model => {
         return model
@@ -36,7 +43,7 @@ class User {
 }
 
 function makeDefaultUser() {
-  const data = {name: 'root'}
+  const data = {name: 'root', passwd: 'root'}
   return new User(data)
 }
 

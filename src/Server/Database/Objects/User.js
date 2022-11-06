@@ -46,7 +46,7 @@ class User {
 }
 
 function makeDefaultUser() {
-  const data = {name: 'root', passwd: 'root'}
+  const data = {name: 'root', groups: ['admin', 'users'], passwd: 'root'}
   return new User(data)
 }
 

@@ -38,12 +38,12 @@ async function main() {
         log.info(`${chalk.bgYellowBright.bold('Reloading')} changes detected`)
         if (error) {
           log.error(`${chalk.bgRedBright.bold('Error')} Build failed — ${error}`)
-          startPreview(previewCmd).then(ps => {
+          await startPreview(previewCmd).then(ps => {
             previewProcess.ps = ps
           })
         } else {
-          previewProcess.ps.kill('SIGTERM')
-          startPreview(previewCmd).then(ps => {
+          await previewProcess.ps.kill('SIGTERM')
+          await startPreview(previewCmd).then(ps => {
             previewProcess.ps = ps
           })
         }
@@ -51,8 +51,8 @@ async function main() {
     },
   }
 
-  await esbuild.build(buildParams).then(() => {
-    startPreview(previewCmd).then(ps => {
+  await esbuild.build(buildParams).then(async () => {
+    await startPreview(previewCmd).then(ps => {
       previewProcess.ps = ps
     })
 
@@ -60,10 +60,10 @@ async function main() {
       previewProcess.ps.kill('SIGTERM')
     })
 
-    rl.on('line', (input) => {
+    rl.on('line', async (input) => {
       if (input.match('^rs$')) {
-        previewProcess.ps.kill('SIGTERM')
-        startPreview(previewCmd).then(ps => {
+        await previewProcess.ps.kill('SIGTERM')
+        await startPreview(previewCmd).then(ps => {
           previewProcess.ps = ps
           log.info(`${chalk.bgGreenBright.bold('Restarted')} !`)
         })

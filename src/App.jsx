@@ -19,6 +19,16 @@ import IdmsaView from './Views/IdmsaView/IdmsaView'
 import SettingsView from './Views/SettingsView/SettingsView'
 import axios from 'axios'
 
+export const webConfig = {
+  APP_HOST: window.location.hostname,
+  APP_PORT: 8081,
+  APP_PROTOCOL: window.location.protocol
+}
+
+export const AppEndpoints = {
+  api: `${webConfig.APP_PROTOCOL}//${webConfig.APP_HOST}:${webConfig.APP_PORT}`,
+}
+
 export default function App() {
   // Available applicationStates: 'loading', 'crashed', 'done'.
   const [applicationState, setApplicationState] = React.useState({state: 'loading'})
@@ -26,14 +36,14 @@ export default function App() {
   const [data, setData] = React.useState({})
 
   useEffect(() => {
-    axios.get(`http://127.0.0.1:8081`)
+    axios.get(`${AppEndpoints.api}/`)
         .then(res => {
           setData(res.data)
           setApplicationState({state: 'done'})
           return data
         })
         .catch(err => {
-          console.error("Backend syncing error, " + ErrorTypes['500'])
+          console.error('Backend syncing error, ' + ErrorTypes['500'])
           setApplicationState({state: 'crashed'})
         })
   }, [])

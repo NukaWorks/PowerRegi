@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { json } from 'express'
 import logger from 'electron-log'
 const idmsa = express.Router()
 
@@ -10,10 +10,12 @@ idmsa.use((req, res, next) => {
   next()
 })
 
+idmsa.use(json())
+
 // Defines Routes
-idmsa.get('/', (req, res) => {
-  res.send('Hello World!')
-  log.debug('Hello World!')
+idmsa.post('/login', (req, res) => {
+  res.send(req.body)
+  log.log(req.body)
 })
 
 module.exports = idmsa

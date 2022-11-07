@@ -5,7 +5,7 @@
 ////////////////////////////////
 
 // Importing modules
-import express from 'express'
+import express, { json } from 'express'
 import chalk from 'chalk'
 import logger from 'electron-log'
 import { commercial_name, version } from '../../package.json'
@@ -28,6 +28,7 @@ app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Methods', 'DELETE, PUT')
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  res.header('Content-Type', 'application/application.json')
   res.header('Server', `${commercial_name} ${version}`)
   log.verbose(`${chalk.bgGreenBright.bold(req.method)} ${req.url} (${chalk.bold(req.ip)} - ${chalk.grey(req.headers['user-agent'])})`)
 
@@ -38,6 +39,7 @@ app.use(function(req, res, next) {
   }
 })
 
+app.use(json())
 app.use('/idmsa', idmsa)
 
 app.get('/', (req, res) => {

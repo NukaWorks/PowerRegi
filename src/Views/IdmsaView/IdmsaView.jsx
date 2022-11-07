@@ -45,7 +45,7 @@ export default function IdmsaView(props) {
                 </span>
               }>
                 <MenuList>
-                  <MenuItem>About Idmsa LoginSystem</MenuItem>
+                  <MenuItem>About Idmsa...</MenuItem>
                 </MenuList>
               </Menu>
             </div>

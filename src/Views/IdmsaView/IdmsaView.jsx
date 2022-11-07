@@ -2,6 +2,17 @@ import React, { createRef, useEffect } from 'react'
 import './IdmsaView.scss'
 import { Button, Link, Menu, MenuItem, MenuList, TextField } from '@powerws/uikit'
 import { commercial_name, version } from '../../../package.json'
+import axios from 'axios'
+import { AppEndpoints } from '../../App'
+
+async function login(username, passwd) {
+  return await axios.post(
+      `${AppEndpoints.api}/idmsa/login`,
+      {username: username, passwd: passwd}
+  ).then(res => {
+    console.log(res.data)
+  })
+}
 
 export default function IdmsaView(props) {
   const [formDisabled, setFormDisabled] = React.useState(true)
@@ -62,13 +73,28 @@ export default function IdmsaView(props) {
 
               <div className={'App__IdmsaView--IdmsaUi__Content--Controls'}>
                 <Link href={'#'}>I forgot my account</Link>
-                <Button color={'Primary'}>Login</Button>
+                <Button
+                    color={'Primary'}
+                    onClick={e => {
+                      e.target.disabled = true
+                      login(fldUsername.current.value, fldPassword.current.value)
+                          .then(res => {
+                            e.target.disabled = false
+                          })
+                          .catch(err => {
+                            e.target.disabled = false
+                            console.error(err)
+                          })
+                    }}
+                >
+                  Login
+                </Button>
               </div>
             </form>
 
             <div className={'App__IdmsaView--IdmsaUi__Footer'}>
               <code className={'App__IdmsaView--IdmsaUi__Footer--InstanceLocation'}>
-                { props.data.domain }
+                {props.data.domain}
               </code>
 
               <code className={'App__IdmsaView--IdmsaUi__Footer--AppVersion'}>

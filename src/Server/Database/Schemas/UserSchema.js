@@ -5,6 +5,7 @@ export const UserSchema = new Schema({
     email: String, // Optional
     passwd: String, // Required
     groups: [String], // Optional
+    uid: String, // Required
     createdAt: {
         type: Date,
         default: Date.now

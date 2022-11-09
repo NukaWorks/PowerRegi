@@ -8,6 +8,7 @@ const log = logger.scope('ConfigProvider')
 let instance = null
 const popularDirs = [
   './',
+  '../',
   '../../',
   'dist/',
   'public/'
@@ -19,16 +20,25 @@ const defaultConfig = {
   'APP_API_PORT': 8081,
   'APP_DB_URI': 'mongodb://localhost:27017/regi',
   'APP_LOG_LEVEL': 'debug',
+  'APP_SESSION_EXPIRES': '2' // 2 days
 }
 
-function fetchConfig() {
-  let runningConfig = {}
-
+function searchFiles(name) {
   for (const dir of popularDirs) {
-    if (fs.existsSync(dir + '.env.json')) {
-      runningConfig = JSON.parse(fs.readFileSync(dir + '.env.json', 'utf8'))
+    if (fs.existsSync(dir + name)) {
+      return fs.readFileSync(dir + name)
     }
   }
+}
+
+let certKeys = {}
+
+function fetchConfig() {
+  let runningConfig
+
+  runningConfig = JSON.parse(searchFiles('.env.json'))
+  certKeys.privkey = searchFiles('regi.key')
+  certKeys.pubkey = searchFiles('regi.key.pub')
 
   for (const key in defaultConfig) {
     if (!runningConfig.hasOwnProperty(key)) {
@@ -60,4 +70,5 @@ function getConfig() {
   return instance
 }
 
+export {certKeys}
 export default getConfig()

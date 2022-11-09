@@ -3,6 +3,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,500,0,0');
 
+@keyframes shake {
+  0% {
+    transform: translateX(-5px);
+  }
+
+  50% {
+    transform: translateX(5px);
+  }
+
+  100% {
+    transform: translateX(-5px);
+  }
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -33,4 +47,8 @@ pre, code {
     align-items: center;
     flex: 1;
   }
+}
+
+.shake {
+  animation: shake 0.1s 0.1s cubic-bezier(.1,1.25,.95,.31) forwards;
 }

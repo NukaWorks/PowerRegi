@@ -1,13 +1,12 @@
-// commonjs
+import subp from 'child_process'
+import readline from 'readline'
+import chalk from 'chalk'
+import logger from 'electron-log'
+import { stdin, stdout } from 'node:process'
+const log = logger.scope('Regi-DevServer')
+import esbuild from 'esbuild'
 
-const subp = require('child_process')
-const readline = require('readline')
-const chalk = require('chalk')
-const log = require('electron-log').scope('Regi-DevServer')
-const esbuild = require('esbuild')
-const {stdin: input, stdout: output} = require('node:process')
-
-const rl = readline.createInterface({input, output})
+const rl = readline.createInterface(stdin, stdout)
 const previewCmd = 'node ./.regi/regi.js'
 const psParams = {
   maxBuffer: 2000 * 1024,
@@ -27,6 +26,7 @@ async function startPreview(cmd) {
 async function main() {
   const buildParams = {
     entryPoints: ['./src/Server/regi.js'],
+    format: 'cjs',
     bundle: true,
     minify: false,
     outfile: './.regi/regi.js',

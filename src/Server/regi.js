@@ -10,9 +10,10 @@ import chalk from 'chalk'
 import logger from 'electron-log'
 import { commercial_name, version } from '../../package.json'
 import idmsa from './Idmsa/IdmsaAuth'
-import env from '../Common/Misc/ConfigProvider'
+import env from '../Common/Misc/ConfigProvider.mjs'
 import mongoose from 'mongoose'
 import { User, UserModel, makeDefaultUser } from './Database/Objects/User'
+import cookieParser from 'cookie-parser'
 
 // Setup Logging
 const log = logger.scope('Regi')
@@ -25,23 +26,21 @@ app.disable('x-powered-by')
 
 // Define Routes
 app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Origin', env.APP_HOST)
   res.header('Access-Control-Allow-Methods', 'DELETE, PUT')
+  res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
   res.header('Server', `${commercial_name} ${version}`)
   log.verbose(`${chalk.bgGreenBright.bold(req.method)} ${req.url} (${chalk.bold(req.ip)} - ${chalk.grey(req.headers['user-agent'])})`)
 
-  if ('OPTIONS' === req.method) {
-    res.sendStatus(200)
-  } else {
-    next()
-  }
+  next()
 })
 
 app.use(json())
-app.use('/idmsa', idmsa)
+app.use(cookieParser());
+app.use('/api/idmsa', idmsa)
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.send({
     'build': {
       'name': commercial_name, 'version': version

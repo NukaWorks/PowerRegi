@@ -26,7 +26,7 @@ export const AppConfig = {
 }
 
 export const AppEndpoints = {
-  api: `${AppConfig.APP_PROTOCOL}//${AppConfig.APP_HOST}:${AppConfig.APP_PORT}`,
+  api: `${AppConfig.APP_PROTOCOL}//${AppConfig.APP_HOST}/api`,
 }
 
 export default function App() {

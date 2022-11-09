@@ -5,6 +5,10 @@ export const UserSchema = new Schema({
     email: String,
     passwd: String,
     groups: [String],
+    tokens: {
+        type: Map,
+        of: String
+    },
     uid: String,
     createdAt: {
         type: Date,

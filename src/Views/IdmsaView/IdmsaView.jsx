@@ -6,28 +6,40 @@ import axios from 'axios'
 import { AppEndpoints } from '../../App'
 
 async function login(username, passwd) {
+  if(!passwd.length > 0) {
+    throw new Error('Password is empty')
+  }
+
   return await axios.post(
       `${AppEndpoints.api}/idmsa/login`,
       {username: username, passwd: passwd}
   ).then(res => {
-    console.log(res.data)
+    // console.log(res.data)
   })
 }
 
 export default function IdmsaView(props) {
-  const [formDisabled, setFormDisabled] = React.useState({type: 'partial'})
-  let fldUsername = createRef()
-  let fldPassword = createRef()
-  let submitBtn = createRef()
+  const [formDisabled, setFormDisabled] = React.useState({type: 'partial', includes: ['submit']})
+  let fldUsername = useRef(null)
+  let fldPassword = useRef(null)
+  let submitBtn = useRef(null)
+  let formContent = useRef(null)
 
   const handleSubmit = e => {
     setFormDisabled({type: 'all'})
     login(fldUsername.current.value, fldPassword.current.value)
         .then(res => {
-          setTimeout(() => setFormDisabled({type: 'none'}), 350)
+          setTimeout(() => setFormDisabled({type: 'none', includes: []}), 350)
         })
         .catch(err => {
-          setTimeout(() => setFormDisabled({type: 'none'}), 350)
+          setTimeout(() => setFormDisabled({type: 'none', includes: []}), 350)
+
+          // Shake the form
+          setTimeout(() => {
+            formContent.current.style.animation = "shake 0.1s cubic-bezier(.1,1.25,.95,.31)" +
+                " infinite"
+            setTimeout(() => formContent.current.style.animation = "none", 300)
+          }, 350)
           console.error(err)
         })
   }
@@ -53,7 +65,7 @@ export default function IdmsaView(props) {
               </Menu>
             </div>
 
-            <form className={'App__IdmsaView--IdmsaUi__Content'}>
+            <form ref={formContent} className={'App__IdmsaView--IdmsaUi__Content'}>
               <Text
                   className={'App__IdmsaView--IdmsaUi__Content--Title'}
                   disabled={formDisabled.type === 'all'}
@@ -70,9 +82,9 @@ export default function IdmsaView(props) {
                     autoComplete={'username'}
                     onInput={e => {
                       if ((e.target.value.length > 0)) {
-                        setFormDisabled({type: 'none'})
+                        setFormDisabled({type: 'none', includes: []})
                       } else {
-                        setFormDisabled({type: 'partial'})
+                        setFormDisabled({type: 'partial', includes: ['submit']})
                       }
                     }}
                     onKeyPress={e => {
@@ -103,7 +115,7 @@ export default function IdmsaView(props) {
                 <Button
                     ref={submitBtn}
                     color={'Primary'}
-                    disabled={formDisabled.type === 'all'}
+                    disabled={formDisabled.type === 'all' || formDisabled.includes[0] === 'submit'}
                     onClick={handleSubmit}
                 >
                   Login

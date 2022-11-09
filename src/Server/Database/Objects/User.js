@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcryptjs'
+import crypto from 'crypto'
 import { UserSchema } from '../Schemas/UserSchema'
 
 const saltRounds = 10
@@ -15,12 +16,17 @@ class User {
     return await bcrypt.hash(password, saltRounds)
   }
 
+  #makeUid() {
+    return crypto.randomUUID().split('-')[0]
+  }
+
   async build() {
     const uModel = await UserModel.findOne({name: this.model.name})
     if (!uModel) {
       this.model = new UserModel(this.model)
+      this.model.uid = this.#makeUid()
       this.model.passwd = await this.generateHash(this.model.passwd)
-
+      if (!this.model.groups.includes('users')) this.model.groups.push('users')
       return this.model.save().then(model => {
         return model
       })

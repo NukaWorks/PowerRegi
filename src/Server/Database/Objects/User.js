@@ -2,6 +2,9 @@ import mongoose from 'mongoose'
 import bcrypt from 'bcryptjs'
 import crypto from 'crypto'
 import { UserSchema } from '../Schemas/UserSchema'
+import jwt from 'jsonwebtoken'
+import env from '../../../Common/Misc/ConfigProvider.mjs'
+import { certKeys } from '../../../Common/Misc/ConfigProvider.mjs'
 
 const saltRounds = 10
 const UserModel = mongoose.model('User', UserSchema)
@@ -39,7 +42,6 @@ class User {
     if (await UserModel.findOne({name: this.model.name})) {
       return UserModel.findOneAndUpdate({name: this.model.name}, data).then(model => {
         this.model = model
-
         return model.save().then(model => {
           return model
         }).catch(err => {
@@ -57,4 +59,10 @@ function makeDefaultUser() {
   return new User(data)
 }
 
-export { User, UserModel, makeDefaultUser }
+function makeAccessToken(uid, groups) {
+  return jwt.sign({
+    u: uid, g: groups, d: Date.now()
+  }, certKeys.privkey, {expiresIn: env.APP_SESSION_EXPIRES})
+}
+
+export { User, UserModel, makeDefaultUser, makeAccessToken }

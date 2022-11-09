@@ -19,14 +19,14 @@ import IdmsaView from './Views/IdmsaView/IdmsaView'
 import SettingsView from './Views/SettingsView/SettingsView'
 import axios from 'axios'
 
-export const webConfig = {
+export const AppConfig = {
   APP_HOST: window.location.hostname,
   APP_PORT: 8081,
   APP_PROTOCOL: window.location.protocol
 }
 
 export const AppEndpoints = {
-  api: `${webConfig.APP_PROTOCOL}//${webConfig.APP_HOST}:${webConfig.APP_PORT}`,
+  api: `${AppConfig.APP_PROTOCOL}//${AppConfig.APP_HOST}:${AppConfig.APP_PORT}`,
 }
 
 export default function App() {

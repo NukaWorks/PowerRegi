@@ -20,7 +20,7 @@ const defaultConfig = {
   'APP_API_PORT': 8081,
   'APP_DB_URI': 'mongodb://localhost:27017/regi',
   'APP_LOG_LEVEL': 'debug',
-  'APP_SESSION_EXPIRES': '2' // 2 days
+  'APP_SESSION_EXPIRES': '48' // 2 days
 }
 
 function searchFiles(name) {

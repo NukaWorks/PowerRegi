@@ -62,7 +62,7 @@ function makeDefaultUser() {
 function makeAccessToken(uid, groups) {
   return jwt.sign({
     u: uid, g: groups, d: Date.now()
-  }, certKeys.privkey, {expiresIn: env.APP_SESSION_EXPIRES})
+  }, certKeys.privkey, {expiresIn: `${env.APP_SESSION_EXPIRES}h`})
 }
 
 export { User, UserModel, makeDefaultUser, makeAccessToken }

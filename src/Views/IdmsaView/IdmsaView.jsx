@@ -26,6 +26,8 @@ export default function IdmsaView(props) {
   let formContent = useRef(null)
 
   const handleSubmit = e => {
+    if (!fldUsername.current.value.length > 0) return false
+
     setFormDisabled({type: 'all'})
     login(fldUsername.current.value, fldPassword.current.value)
         .then(res => {

@@ -3,8 +3,7 @@ import bcrypt from 'bcryptjs'
 import crypto from 'crypto'
 import { UserSchema } from '../Schemas/UserSchema'
 import jwt from 'jsonwebtoken'
-import env from '../../../Common/Misc/ConfigProvider.mjs'
-import { certKeys } from '../../../Common/Misc/ConfigProvider.mjs'
+import env, { certKeys } from '../../../Common/Misc/ConfigProvider.mjs'
 
 const saltRounds = 10
 const UserModel = mongoose.model('User', UserSchema)

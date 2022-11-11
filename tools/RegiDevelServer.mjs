@@ -3,9 +3,9 @@ import readline from 'readline'
 import chalk from 'chalk'
 import logger from 'electron-log'
 import { stdin, stdout } from 'node:process'
+import esbuild from 'esbuild'
 
 const log = logger.scope('Regi-DevServer')
-import esbuild from 'esbuild'
 
 const rl = readline.createInterface(stdin, stdout)
 const previewCmd = 'node ./.regi/regi.js'

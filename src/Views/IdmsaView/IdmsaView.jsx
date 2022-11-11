@@ -1,6 +1,6 @@
-import React, { createRef, useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import './IdmsaView.scss'
-import { Button, Link, Menu, MenuItem, MenuList, TextField, Text } from '@powerws/uikit'
+import { Button, Link, Menu, MenuItem, MenuList, Text, TextField } from '@powerws/uikit'
 import { commercial_name, version } from '../../../package.json'
 import axios from 'axios'
 import { AppEndpoints } from '../../App'
@@ -14,7 +14,7 @@ async function login(username, passwd) {
       `${AppEndpoints.api}/idmsa/login`,
       {username: username, passwd: passwd}
   ).then(res => {
-    // console.log(res.data)
+    console.log(res.data)
   })
 }
 

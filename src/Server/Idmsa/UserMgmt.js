@@ -1,5 +1,6 @@
 import express from 'express'
 import logger from 'electron-log'
+
 const userMgmt = express.Router()
 
 // Setup Logging

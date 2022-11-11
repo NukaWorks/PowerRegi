@@ -12,7 +12,7 @@ import { commercial_name, version } from '../../package.json'
 import idmsa from './Idmsa/IdmsaAuth'
 import env from '../Common/Misc/ConfigProvider.mjs'
 import mongoose from 'mongoose'
-import { User, UserModel, makeDefaultUser } from './Database/Objects/User'
+import { makeDefaultUser, UserModel } from './Database/Objects/User'
 import cookieParser from 'cookie-parser'
 
 // Setup Logging

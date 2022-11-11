@@ -5,6 +5,7 @@ export const UserSchema = new Schema({
     email: String,
     passwd: String,
     groups: [String],
+    sessions: [String],
     tokens: {
         type: Map,
         of: String

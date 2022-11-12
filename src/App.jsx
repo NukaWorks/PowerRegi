@@ -16,6 +16,7 @@ import axios from 'axios'
 import { AuthContext } from './Common/Misc/AppContexts'
 import Router from './Common/Modules/Router/Router'
 import { DataContext } from './Common/Misc/AppContexts'
+import StatusOverlay from './Common/Modules/StatusOverlay/StatusOverlay'
 
 export const AppConfig = {
   APP_HOST: window.location.hostname,
@@ -93,6 +94,8 @@ export default function App() {
                   )}
                 </UiApp>
             )}
+
+            <StatusOverlay />
           </AppActivity>
         </AuthContext.Provider>
       </DataContext.Provider>

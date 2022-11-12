@@ -34,6 +34,7 @@ export default function IdmsaView(props) {
   }, [])
 
   const handleSubmit = e => {
+    fldUsername.current.value = fldUsername.current.value.trim()
     if (!fldUsername.current.value.length > 0) return false
 
     setFormDisabled({type: 'all'})
@@ -58,7 +59,7 @@ export default function IdmsaView(props) {
     // Redirect to origin if logged in
     let redir = query.get('redirect')
     if (!redir) return <Navigate to={'/home'}/>
-    else return (<Navigate to={redir} replace={true} />)
+    else return (<Navigate to={redir} replace={true}/>)
   } else {
     return (
         <>

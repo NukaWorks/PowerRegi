@@ -24,6 +24,9 @@ class Session {
   }
 
   async checkSession(id, user) {
+    const session = await SessionModel.findOne({id}).then(session => {
+     return user.sessions.includes(session.id)
+    })
     return user.sessions.includes(id);
   }
 

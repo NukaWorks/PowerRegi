@@ -18,15 +18,14 @@ export default function Router() {
           <Route
               caseSensitive
               path="/home"
-              element={AuthContext.isLogged
+              element={authContext.isLogged
                   ? <Home/>
                   : <Navigate
                       replace
                       to={`/idmsa?redirect=${encodeURIComponent(document.location.pathname)}`}
                   />}
           />
-          <Route caseSensitive path={'/idmsa'}
-                 element={<IdmsaView />}/>
+          <Route caseSensitive path={'/idmsa'} element={<IdmsaView />}/>
           <Route caseSensitive path={'/console'} element={<ConsoleMgmt/>}/>
           <Route caseSensitive path={'/settings'} element={<SettingsView/>}/>
 

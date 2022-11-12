@@ -32,7 +32,7 @@ export const AppEndpoints = {
 export default function App() {
   // Available applicationStates: 'loading', 'crashed', 'done'.
   const [applicationState, setApplicationState] = React.useState({state: 'loading'})
-  const [loggedIn, setLoggedIn] = React.useState(false)
+  const [loggedIn, setLoggedIn] = React.useState(true)
   const [data, setData] = React.useState({})
 
   useEffect(() => {
@@ -93,7 +93,6 @@ export default function App() {
                   <BrowserRouter>
                     <Routes>
                       <Route path={'/'} element={<Navigate replace to={'/home'}/>}/>
-                      <Route caseSensitive path="/idmsa" element={<IdmsaView data={data}/>}/>
                       <Route
                           caseSensitive
                           path="/home"
@@ -104,6 +103,7 @@ export default function App() {
                                   to={`/idmsa?redirect=${encodeURIComponent(document.location.pathname)}`}
                               />}
                       />
+                      <Route caseSensitive path={'/idmsa'} element={<IdmsaView loggedIn={loggedIn} data={data} />}/>
                       <Route caseSensitive path={'/console'} element={<ConsoleMgmt/>}/>
                       <Route caseSensitive path={'/settings'} element={<SettingsView/>}/>
 

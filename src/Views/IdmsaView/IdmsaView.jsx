@@ -1,12 +1,13 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import './IdmsaView.scss'
 import { Button, Link, Menu, MenuItem, MenuList, Text, TextField } from '@powerws/uikit'
 import { commercial_name, version } from '../../../package.json'
 import axios from 'axios'
 import { AppEndpoints } from '../../App'
+import Cookies from 'js-cookie'
 
 async function login(username, passwd) {
-  if(!passwd.length > 0) {
+  if (!passwd.length > 0) {
     throw new Error('Password is empty')
   }
 
@@ -25,6 +26,10 @@ export default function IdmsaView(props) {
   let submitBtn = useRef(null)
   let formContent = useRef(null)
 
+  useEffect(() => {
+    console.log(Cookies.get('idmsa'), Cookies.get('session'))
+  }, [])
+
   const handleSubmit = e => {
     if (!fldUsername.current.value.length > 0) return false
 
@@ -38,9 +43,9 @@ export default function IdmsaView(props) {
 
           // Shake the form
           setTimeout(() => {
-            formContent.current.style.animation = "shake 0.1s cubic-bezier(.1,1.25,.95,.31)" +
-                " infinite"
-            setTimeout(() => formContent.current.style.animation = "none", 300)
+            formContent.current.style.animation = 'shake 0.1s cubic-bezier(.1,1.25,.95,.31)' +
+                ' infinite'
+            setTimeout(() => formContent.current.style.animation = 'none', 300)
           }, 350)
           console.error(err)
         })

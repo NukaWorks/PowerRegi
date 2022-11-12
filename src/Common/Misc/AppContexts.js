@@ -1,7 +1,7 @@
 import React from 'react'
 
-const AuthContext = React.createContext({ isLogged: false })
-const DataContext = React.createContext({ data: {} })
-const StateContext = React.createContext({ state: {} })
+const AuthContext = React.createContext()
+const DataContext = React.createContext()
+const StateContext = React.createContext()
 
 export { AuthContext, DataContext, StateContext }

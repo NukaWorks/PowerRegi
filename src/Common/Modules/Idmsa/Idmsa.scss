@@ -21,7 +21,7 @@
 }
 
 .Module {
-  &--IdmsaUi {
+  &__IdmsaUi {
     display: flex;
     flex-direction: column;
     background-color: #FFFBFC;
@@ -33,14 +33,14 @@
     border: 1px solid rgba(0, 0, 0, 0.4);
     animation: 0.3s fade ease-out forwards;
 
-    &__Header {
+    &--Header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       width: 100%;
     }
 
-    &__Content {
+    &--Content {
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -50,26 +50,26 @@
       flex: 1;
       animation: 0.3s slide-in ease-out forwards;
 
-      &--Title {
+      &__Title {
         align-self: flex-start;
         font-weight: 300;
         font-size: 15pt;
       }
 
-      &--Fields {
+      &__Fields {
         display: flex;
         flex-direction: column;
         gap: 0.5em;
         width: 100%;
 
-        &__Field {
+        &--Field {
           height: 1.5em;
           font-weight: 400;
           font-size: 11pt;
         }
       }
 
-      &--Controls {
+      &__Controls {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -77,14 +77,14 @@
       }
     }
 
-    &__Footer {
+    &--Footer {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       font-size: 8pt;
       width: 100%;
 
-      &--AppVersion {
+      &__AppVersion {
         text-align: right;
       }
     }

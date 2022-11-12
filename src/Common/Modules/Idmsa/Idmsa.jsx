@@ -52,10 +52,10 @@ export default function Idmsa() {
     else return (<Navigate to={redir} replace={true}/>)
   } else {
     return (
-        <div className={'Module--IdmsaUi'}>
-          <div className={'Module--IdmsaUi__Header'}>
-            <h1 className={'Module--IdmsaUi__Header--Title'}>Hi ! 👋</h1>
-            <Menu className={'Module--IdmsaUi__Header--HelpIcon'} title={
+        <div className={'Module__IdmsaUi'}>
+          <div className={'Module__IdmsaUi--Header'}>
+            <h1 className={'Module__IdmsaUi--Header__Title'}>Hi ! 👋</h1>
+            <Menu className={'Module__IdmsaUi--Header__HelpIcon'} title={
               <span className="material-symbols-rounded">
                   help
                 </span>
@@ -66,16 +66,16 @@ export default function Idmsa() {
             </Menu>
           </div>
 
-          <form ref={formContent} className={'Module--IdmsaUi__Content'}>
+          <form ref={formContent} className={'Module__IdmsaUi--Content'}>
             <Text
-                className={'Module--IdmsaUi__Content--Title'}
+                className={'Module__IdmsaUi--Content__Title'}
                 disabled={formDisabled.type === 'all'}
             >
               Login
             </Text>
-            <div className={'Module--IdmsaUi__Content--Fields'}>
+            <div className={'Module__IdmsaUi--Content__Fields'}>
               <TextField
-                  className={'Module--IdmsaUi__Content--Fields__Field'}
+                  className={'Module__IdmsaUi--Content__Fields--Field'}
                   type={'text'}
                   placeholder={'Username'}
                   disabled={formDisabled.type === 'all'}
@@ -94,7 +94,7 @@ export default function Idmsa() {
               />
 
               <TextField
-                  className={'Module--IdmsaUi__Content--Fields__Field'}
+                  className={'Module__IdmsaUi--Content__Fields--Field'}
                   type={'password'}
                   placeholder={'Password'}
                   disabled={formDisabled.type === 'partial' || formDisabled.type === 'all'}
@@ -106,7 +106,7 @@ export default function Idmsa() {
               />
             </div>
 
-            <div className={'Module--IdmsaUi__Content--Controls'}>
+            <div className={'Module__IdmsaUi--Content__Controls'}>
               <Link
                   disabled={formDisabled.type === 'all'}
                   href={'#'}
@@ -124,12 +124,12 @@ export default function Idmsa() {
             </div>
           </form>
 
-          <div className={'Module--IdmsaUi__Footer'}>
-            <code className={'Module--IdmsaUi__Footer--InstanceLocation'}>
+          <div className={'Module__IdmsaUi--Footer'}>
+            <code className={'Module__IdmsaUi--Footer__InstanceLocation'}>
               {dataContext.data.domain}
             </code>
 
-            <code className={'Module--IdmsaUi__Footer--AppVersion'}>
+            <code className={'Module__IdmsaUi--Footer__AppVersion'}>
               {commercial_name} {version}
             </code>
           </div>

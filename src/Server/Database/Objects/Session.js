@@ -24,10 +24,15 @@ class Session {
   }
 
   async checkSession(id, user) {
-    const session = await SessionModel.findOne({id}).then(session => {
-     return user.sessions.includes(session.id)
-    })
-    return user.sessions.includes(id);
+    return await SessionModel.findOne({id}).then(async session => {
+          return await user.findOne({sessions: id})
+              .then(user => {
+                if (user) {
+                  return session.createdAt > Date.now()
+                } else return false
+              }).catch(() => false)
+        }
+    ).catch(() => false)
   }
 
   async deleteSession(id, user) {

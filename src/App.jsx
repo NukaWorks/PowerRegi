@@ -10,14 +10,12 @@ import {
 } from '@powerws/uikit'
 import { commercial_name } from '../package.json'
 import React, { useEffect } from 'react'
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import Home from './Views/HomeView/HomeView'
-import ConsoleMgmt from './Views/ConsoleMgmt/ConsoleMgmt'
 import ErrorView from './Views/ErrorView/ErrorView'
 import ErrorTypes from './Common/Misc/ErrorTypes'
-import IdmsaView from './Views/IdmsaView/IdmsaView'
-import SettingsView from './Views/SettingsView/SettingsView'
 import axios from 'axios'
+import { AuthContext } from './Common/Misc/AppContexts'
+import Router from './Common/Modules/Router/Router'
+import { DataContext } from './Common/Misc/AppContexts'
 
 export const AppConfig = {
   APP_HOST: window.location.hostname,
@@ -32,7 +30,6 @@ export const AppEndpoints = {
 export default function App() {
   // Available applicationStates: 'loading', 'crashed', 'done'.
   const [applicationState, setApplicationState] = React.useState({state: 'loading'})
-  const [loggedIn, setLoggedIn] = React.useState(true)
   const [data, setData] = React.useState({})
 
   useEffect(() => {
@@ -49,70 +46,55 @@ export default function App() {
   }, [])
 
   return (
-      <AppActivity theme={'Light'}>
-        <AppHeader title={commercial_name}>
-          <MenuBar>
-            <Menu title={'File'}>
-              <MenuList>
-                <MenuItem>New Repository</MenuItem>
-                <MenuItem>New Application</MenuItem>
-                <MenuItem>New Package</MenuItem>
-                <MenuItem>Settings</MenuItem>
-                <MenuItem>Logout...</MenuItem>
-              </MenuList>
-            </Menu>
+      <DataContext.Provider value={{ data: data }}>
+        <AuthContext.Provider value={{isLogged: false}}>
+          <AppActivity theme={'Light'}>
+            <AppHeader title={commercial_name}>
+              <MenuBar>
+                <Menu title={'File'}>
+                  <MenuList>
+                    <MenuItem>New Repository</MenuItem>
+                    <MenuItem>New Application</MenuItem>
+                    <MenuItem>New Package</MenuItem>
+                    <MenuItem>Settings</MenuItem>
+                    <MenuItem>Logout...</MenuItem>
+                  </MenuList>
+                </Menu>
 
-            <Menu title={'Tools'}>
-              <MenuList>
-                <MenuItem onClick={() => window.location = '/home'}>Go to Home View</MenuItem>
-                <MenuItem onClick={() => window.location.reload()}>Refresh</MenuItem>
-              </MenuList>
-            </Menu>
+                <Menu title={'Tools'}>
+                  <MenuList>
+                    <MenuItem onClick={() => window.location = '/home'}>Go to Home View</MenuItem>
+                    <MenuItem onClick={() => window.location.reload()}>Refresh</MenuItem>
+                  </MenuList>
+                </Menu>
 
-            <Menu title={'Help'}>
-              <MenuList>
-                <MenuItem>Check for Updates...</MenuItem>
-                <MenuItem>Documentation Center</MenuItem>
-                <MenuItem>About PowerWs & UiKit</MenuItem>
-                <MenuItem>About {commercial_name}</MenuItem>
-              </MenuList>
-            </Menu>
-          </MenuBar>
-        </AppHeader>
+                <Menu title={'Help'}>
+                  <MenuList>
+                    <MenuItem>Check for Updates...</MenuItem>
+                    <MenuItem>Documentation Center</MenuItem>
+                    <MenuItem>About PowerWs & UiKit</MenuItem>
+                    <MenuItem>About {commercial_name}</MenuItem>
+                  </MenuList>
+                </Menu>
+              </MenuBar>
+            </AppHeader>
 
-        {applicationState.state === 'loading' ? (
-            <div className={'App__LoadingScreen'}>
-              <Spinner size={'Large'} color={'Blue'}/>
-            </div>
-        ) : (
-            <UiApp rounded>
+            {applicationState.state === 'loading' ? (
+                <div className={'App__LoadingScreen'}>
+                  <Spinner size={'Large'} color={'Blue'}/>
+                </div>
+            ) : (
+                <UiApp rounded>
 
-              {applicationState.state === 'crashed' ? (
-                  <ErrorView errorCode={ErrorTypes['500']}/>
-              ) : (
-                  <BrowserRouter>
-                    <Routes>
-                      <Route path={'/'} element={<Navigate replace to={'/home'}/>}/>
-                      <Route
-                          caseSensitive
-                          path="/home"
-                          element={loggedIn
-                              ? <Home/>
-                              : <Navigate
-                                  replace
-                                  to={`/idmsa?redirect=${encodeURIComponent(document.location.pathname)}`}
-                              />}
-                      />
-                      <Route caseSensitive path={'/idmsa'} element={<IdmsaView loggedIn={loggedIn} data={data} />}/>
-                      <Route caseSensitive path={'/console'} element={<ConsoleMgmt/>}/>
-                      <Route caseSensitive path={'/settings'} element={<SettingsView/>}/>
-
-                      <Route path="*" element={<ErrorView errorCode={ErrorTypes['404']}/>}/>
-                    </Routes>
-                  </BrowserRouter>
-              )}
-            </UiApp>
-        )}
-      </AppActivity>
+                  {applicationState.state === 'crashed' ? (
+                      <ErrorView errorCode={ErrorTypes['500']}/>
+                  ) : (
+                      <Router data={data}/>
+                  )}
+                </UiApp>
+            )}
+          </AppActivity>
+        </AuthContext.Provider>
+      </DataContext.Provider>
   )
 }

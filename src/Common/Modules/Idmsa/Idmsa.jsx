@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef } from 'react'
 import { Button, Link, Menu, MenuItem, MenuList, Text, TextField } from '@powerws/uikit'
 import { commercial_name, version } from '../../../../package.json'
 import { useQuery } from '../../Misc/Hooks'
-import { AuthContext, DataContext } from '../../Misc/AppContexts'
+import { AuthContext, DataContext, StateContext } from '../../Misc/AppContexts'
 import Cookies from 'js-cookie'
 import { Navigate } from 'react-router-dom'
 import axios from 'axios'
@@ -18,6 +18,7 @@ export default function Idmsa() {
   let query = useQuery()
   const authContext = useContext(AuthContext)
   const dataContext = useContext(DataContext)
+  const stateContext = useContext(StateContext)
 
   useEffect(() => {
     console.log(Cookies.get('idmsa'), Cookies.get('session'))

@@ -13,7 +13,7 @@ import React, { useEffect } from 'react'
 import ErrorView from './Views/ErrorView/ErrorView'
 import ErrorTypes from './Common/Misc/ErrorTypes'
 import axios from 'axios'
-import { AuthContext } from './Common/Misc/AppContexts'
+import { AuthContext, StateContext } from './Common/Misc/AppContexts'
 import Router from './Common/Modules/Router/Router'
 import { DataContext } from './Common/Misc/AppContexts'
 import StatusOverlay from './Common/Modules/StatusOverlay/StatusOverlay'
@@ -47,57 +47,59 @@ export default function App() {
   }, [])
 
   return (
-      <DataContext.Provider value={{ data: data }}>
-        <AuthContext.Provider value={{isLogged: false}}>
-          <AppActivity theme={'Light'}>
-            <AppHeader title={commercial_name}>
-              <MenuBar>
-                <Menu title={'File'}>
-                  <MenuList>
-                    <MenuItem>New Repository</MenuItem>
-                    <MenuItem>New Application</MenuItem>
-                    <MenuItem>New Package</MenuItem>
-                    <MenuItem>Settings</MenuItem>
-                    <MenuItem>Logout...</MenuItem>
-                  </MenuList>
-                </Menu>
+      <StateContext.Provider value={{state: applicationState}}>
+        <DataContext.Provider value={{data: data}}>
+          <AuthContext.Provider value={{isLogged: false}}>
+            <AppActivity theme={'Light'}>
+              <AppHeader title={commercial_name}>
+                <MenuBar>
+                  <Menu title={'File'}>
+                    <MenuList>
+                      <MenuItem>New Repository</MenuItem>
+                      <MenuItem>New Application</MenuItem>
+                      <MenuItem>New Package</MenuItem>
+                      <MenuItem>Settings</MenuItem>
+                      <MenuItem>Logout...</MenuItem>
+                    </MenuList>
+                  </Menu>
 
-                <Menu title={'Tools'}>
-                  <MenuList>
-                    <MenuItem onClick={() => window.location = '/home'}>Go to Home View</MenuItem>
-                    <MenuItem onClick={() => window.location.reload()}>Refresh</MenuItem>
-                  </MenuList>
-                </Menu>
+                  <Menu title={'Tools'}>
+                    <MenuList>
+                      <MenuItem onClick={() => window.location = '/home'}>Go to Home View</MenuItem>
+                      <MenuItem onClick={() => window.location.reload()}>Refresh</MenuItem>
+                    </MenuList>
+                  </Menu>
 
-                <Menu title={'Help'}>
-                  <MenuList>
-                    <MenuItem>Check for Updates...</MenuItem>
-                    <MenuItem>Documentation Center</MenuItem>
-                    <MenuItem>About PowerWs & UiKit</MenuItem>
-                    <MenuItem>About {commercial_name}</MenuItem>
-                  </MenuList>
-                </Menu>
-              </MenuBar>
-            </AppHeader>
+                  <Menu title={'Help'}>
+                    <MenuList>
+                      <MenuItem>Check for Updates...</MenuItem>
+                      <MenuItem>Documentation Center</MenuItem>
+                      <MenuItem>About PowerWs & UiKit</MenuItem>
+                      <MenuItem>About {commercial_name}</MenuItem>
+                    </MenuList>
+                  </Menu>
+                </MenuBar>
+              </AppHeader>
 
-            {applicationState.state === 'loading' ? (
-                <div className={'App__LoadingScreen'}>
-                  <Spinner size={'Large'} color={'Blue'}/>
-                </div>
-            ) : (
-                <UiApp rounded>
+              {applicationState.state === 'loading' ? (
+                  <div className={'App__LoadingScreen'}>
+                    <Spinner size={'Large'} color={'Blue'}/>
+                  </div>
+              ) : (
+                  <UiApp rounded>
 
-                  {applicationState.state === 'crashed' ? (
-                      <ErrorView errorCode={ErrorTypes['500']}/>
-                  ) : (
-                      <Router data={data}/>
-                  )}
-                </UiApp>
-            )}
+                    {applicationState.state === 'crashed' ? (
+                        <ErrorView errorCode={ErrorTypes['500']}/>
+                    ) : (
+                        <Router data={data}/>
+                    )}
+                  </UiApp>
+              )}
 
-            <StatusOverlay />
-          </AppActivity>
-        </AuthContext.Provider>
-      </DataContext.Provider>
+              <StatusOverlay/>
+            </AppActivity>
+          </AuthContext.Provider>
+        </DataContext.Provider>
+      </StateContext.Provider>
   )
 }

@@ -5,7 +5,7 @@ import { makeAccessToken, UserModel } from '../Database/Objects/User'
 import env, { certKeys } from '../../Common/Misc/ConfigProvider.mjs'
 import cookieParser from 'cookie-parser'
 import jwt from 'jsonwebtoken'
-import { Session, SessionModel } from '../Database/Objects/Session'
+import { checkSession, Session, SessionModel } from '../Database/Objects/Session'
 import chalk from 'chalk'
 
 const idmsa = express.Router()
@@ -54,7 +54,8 @@ idmsa.post('/login', (req, res) => {
                           .catch(() => {
                             res.sendStatus(401, 'Unable to create session')
                           })
-                    } else commitAuth(null, res, req, token)
+                    } else commitAuth(result, res, req, token)  // Do not create a new session,
+                                                                // renew it.
                   })
             } else {
               makeSession(req, user)
@@ -75,18 +76,21 @@ idmsa.post('/login', (req, res) => {
 })
 
 idmsa.post('/session', (req, res) => {
-
+  // Fetch les cookies et faire
+  checkSession(req.cookies.session, req.body.uid)
 })
 
 function commitAuth(session, res, req, token) {
   if (session) res.cookie('session', session.id, {
     maxAge: env.APP_SESSION_EXPIRES * 60 * 60 * 1000,
-    sameSite: 'strict'
+    sameSite: 'strict',
+    secure: true
   })
 
   if (token) res.cookie('idmsa', token, {
     maxAge: env.APP_SESSION_EXPIRES * 60 * 60 * 1000,
-    sameSite: 'strict'
+    sameSite: 'strict',
+    secure: true
   })
 
   if (!token && !session) {

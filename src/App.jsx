@@ -32,6 +32,7 @@ export default function App() {
   // Available applicationStates: 'loading', 'crashed', 'done'.
   const [applicationState, setApplicationState] = React.useState({state: 'loading'})
   const [data, setData] = React.useState({})
+  const [logged, setLogged] = React.useState(false)
 
   useEffect(() => {
     axios.get(`${AppEndpoints.api}/`)
@@ -47,9 +48,9 @@ export default function App() {
   }, [])
 
   return (
-      <StateContext.Provider value={{state: applicationState}}>
-        <DataContext.Provider value={{data: data}}>
-          <AuthContext.Provider value={{isLogged: false}}>
+      <StateContext.Provider value={{applicationState, setApplicationState}}>
+        <DataContext.Provider value={{data, setData}}>
+          <AuthContext.Provider value={{logged, setLogged}}>
             <AppActivity theme={'Light'}>
               <AppHeader title={commercial_name}>
                 <MenuBar>

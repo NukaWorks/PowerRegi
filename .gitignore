@@ -40,3 +40,4 @@ next-env.d.ts
 /.regi/
 /regi.key
 /regi.key.pub
+/nginx.conf

@@ -18,7 +18,7 @@ export default function Router() {
           <Route
               caseSensitive
               path="/home"
-              element={authContext.isLogged
+              element={authContext.logged
                   ? <Home/>
                   : <Navigate
                       replace

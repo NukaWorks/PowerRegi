@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Button, Link, Menu, MenuItem, MenuList, Text, TextField } from '@powerws/uikit'
 import { commercial_name, version } from '../../../../package.json'
 import { useQuery } from '../../Misc/Hooks'
@@ -16,12 +16,20 @@ export default function Idmsa() {
   let submitBtn = useRef(null)
   let formContent = useRef(null)
   let query = useQuery()
-  const authContext = useContext(AuthContext)
   const dataContext = useContext(DataContext)
   const stateContext = useContext(StateContext)
 
+  const {logged, setLogged} = useContext(AuthContext)
+
   useEffect(() => {
     console.log(Cookies.get('idmsa'), Cookies.get('session'))
+
+    console.log(logged)
+
+    if (Cookies.get('idmsa') && Cookies.get('session')) {
+      console.log('Already logged in')
+      setLogged(true)
+    }
   }, [])
 
   const handleSubmit = e => {
@@ -46,7 +54,7 @@ export default function Idmsa() {
         })
   }
 
-  if (authContext.isLogged) {
+  if (logged) {
     // Redirect to origin if logged in
     let redir = query.get('redirect')
     if (!redir) return <Navigate to={'/home'}/>

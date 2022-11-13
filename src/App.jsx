@@ -18,6 +18,7 @@ import Router from './Common/Modules/Router/Router'
 import { DataContext } from './Common/Misc/AppContexts'
 import StatusOverlay from './Common/Modules/StatusOverlay/StatusOverlay'
 
+
 export const AppConfig = {
   APP_HOST: window.location.hostname,
   APP_PORT: 8081,
@@ -60,14 +61,18 @@ export default function App() {
                       <MenuItem>New Application</MenuItem>
                       <MenuItem>New Package</MenuItem>
                       <MenuItem>Settings</MenuItem>
-                      <MenuItem>Logout...</MenuItem>
+                      <MenuItem
+                          disabled={logged}
+                          onClick={() => window.location = `/idmsa?logout=true&redirect=${encodeURIComponent(document.location.pathname)}`}>
+                        Logout...
+                      </MenuItem>
                     </MenuList>
                   </Menu>
 
                   <Menu title={'Tools'}>
                     <MenuList>
                       <MenuItem onClick={() => window.location = '/home'}>Go to Home View</MenuItem>
-                      <MenuItem onClick={() => window.location.reload()}>Refresh</MenuItem>
+                      <MenuItem onClick={() => window.location.reload()}>Reload</MenuItem>
                     </MenuList>
                   </Menu>
 

@@ -4,7 +4,7 @@ import { commercial_name, version } from '../../../../package.json'
 import { useQuery } from '../../Misc/Hooks'
 import { AuthContext, DataContext, StateContext } from '../../Misc/AppContexts'
 import Cookies from 'js-cookie'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import jwdec from 'jwt-decode'
 import { AppEndpoints } from '../../../App'
@@ -20,6 +20,9 @@ export default function Idmsa() {
   let formContent = useRef(null)
   let query = useQuery()
   const dataContext = useContext(DataContext)
+  const {logged, setLogged} = useContext(AuthContext)
+  const {applicationState, setApplicationState} = useContext(StateContext)
+  let logoutQuery = query.get('logout')
 
   ax = axios.create({
     baseURL: `${AppEndpoints.api}/idmsa`,
@@ -28,40 +31,51 @@ export default function Idmsa() {
     }
   })
 
-  const {logged, setLogged} = useContext(AuthContext)
-  const {applicationState, setApplicationState} = useContext(StateContext)
-
   useLayoutEffect(() => {
     setApplicationState({state: 'loading'})
-    if (Cookies.get('idmsa') && Cookies.get('session')) {
-      const jw = jwdec(Cookies.get('idmsa'))
-      if (jw.exp > Math.floor(Date.now())) {
-        Cookies.remove('idmsa')
-        Cookies.remove('session')
-        console.log('token expired')
-      }
 
-      ax.post(`/session`, {
-        uid: jw.u,
-        session: Cookies.get('session'),
-        idmsa: Cookies.get('idmsa')
-      })
-          .then(res => {
-            if (res.data === 'OK') {
-              setLogged(true)
-            } else {
-              Cookies.remove('idmsa')
-              Cookies.remove('session')
+    if (Cookies.get('idmsa') && Cookies.get('session')) {
+      if (logoutQuery && logged) {
+        logout()
+            .then(() => {
+              clearSession()
               setLogged(false)
-            }
-            setApplicationState({state: 'done'})
-          })
-          .catch(err => {
-            setApplicationState({state: 'crashed'})
-            console.error(err)
-          })
+              query.delete('logout')
+            })
+            .catch(err => {
+              setApplicationState({state: 'crashed'})
+              console.error(err)
+            })
+      } else {
+        const jw = jwdec(Cookies.get('idmsa'))
+        if (jw.exp > Math.floor(Date.now())) clearSession()
+
+        ax.post(`/session`, {
+          uid: jw.u,
+          session: Cookies.get('session'),
+          idmsa: Cookies.get('idmsa')
+        })
+            .then(res => {
+              if (res.data === 'OK') {
+                setLogged(true)
+              } else {
+                clearSession()
+                setLogged(false)
+              }
+              setApplicationState({state: 'done'})
+            })
+            .catch(err => {
+              if (err.response.status === 401) {
+                clearSession()
+                setLogged(false)
+                setApplicationState({state: 'done'})
+              } else setApplicationState({state: 'crashed'})
+              console.error(err)
+            })
+      }
     } else {
       setLogged(false)
+      clearSession()
       setApplicationState({state: 'done'})
     }
   }, [])
@@ -195,12 +209,11 @@ async function login(username, passwd) {
   })
 }
 
+function clearSession() {
+  Cookies.remove('idmsa')
+  Cookies.remove('session')
+}
+
 async function logout() {
   return await ax.post(`/logout`)
-      .then(res => {
-        return res
-      })
-      .catch(err => {
-        console.error(err)
-      })
 }

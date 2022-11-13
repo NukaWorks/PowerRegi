@@ -6,6 +6,7 @@ import { AuthContext, DataContext, StateContext } from '../../Misc/AppContexts'
 import Cookies from 'js-cookie'
 import { Navigate } from 'react-router-dom'
 import axios from 'axios'
+import jwdec from "jwt-decode"
 import { AppEndpoints } from '../../../App'
 import './Idmsa.scss'
 
@@ -20,15 +21,37 @@ export default function Idmsa() {
   const stateContext = useContext(StateContext)
 
   const {logged, setLogged} = useContext(AuthContext)
+  const {applicationState, setApplicationState} = useContext(StateContext)
 
   useEffect(() => {
-    console.log(Cookies.get('idmsa'), Cookies.get('session'))
-
-    console.log(logged)
-
+    setApplicationState({state: 'loading'})
     if (Cookies.get('idmsa') && Cookies.get('session')) {
-      console.log('Already logged in')
-      setLogged(true)
+      const jw = jwdec(Cookies.get('idmsa'))
+      if (jw.exp > Math.floor(Date.now())) {
+        Cookies.remove('idmsa')
+        Cookies.remove('session')
+        console.log('token expired')
+      }
+
+      axios.post(`${AppEndpoints.api}/idmsa/session`, {
+            uid: jw.u,
+            session: Cookies.get('session'),
+            idmsa: Cookies.get('idmsa')
+          })
+          .then(res => {
+            if (res.data === 'OK') {
+              setLogged(true)
+            } else {
+              Cookies.remove('idmsa')
+              Cookies.remove('session')
+              setLogged(false)
+            }
+            setApplicationState({state: 'done'})
+          })
+          .catch(err => {
+            setApplicationState({state: 'crashed'})
+            console.error(err)
+          })
     }
   }, [])
 

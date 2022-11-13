@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Button, Link, Menu, MenuItem, MenuList, Text, TextField } from '@powerws/uikit'
 import { commercial_name, version } from '../../../../package.json'
 import { useQuery } from '../../Misc/Hooks'
@@ -6,9 +6,11 @@ import { AuthContext, DataContext, StateContext } from '../../Misc/AppContexts'
 import Cookies from 'js-cookie'
 import { Navigate } from 'react-router-dom'
 import axios from 'axios'
-import jwdec from "jwt-decode"
+import jwdec from 'jwt-decode'
 import { AppEndpoints } from '../../../App'
 import './Idmsa.scss'
+
+let ax = null
 
 export default function Idmsa() {
   const [formDisabled, setFormDisabled] = React.useState({type: 'partial', includes: ['submit']})
@@ -18,12 +20,18 @@ export default function Idmsa() {
   let formContent = useRef(null)
   let query = useQuery()
   const dataContext = useContext(DataContext)
-  const stateContext = useContext(StateContext)
+
+  ax = axios.create({
+    baseURL: `${AppEndpoints.api}/idmsa`,
+    headers: {
+      'Authorization': `${Cookies.get('idmsa')}`
+    }
+  })
 
   const {logged, setLogged} = useContext(AuthContext)
   const {applicationState, setApplicationState} = useContext(StateContext)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setApplicationState({state: 'loading'})
     if (Cookies.get('idmsa') && Cookies.get('session')) {
       const jw = jwdec(Cookies.get('idmsa'))
@@ -33,11 +41,11 @@ export default function Idmsa() {
         console.log('token expired')
       }
 
-      axios.post(`${AppEndpoints.api}/idmsa/session`, {
-            uid: jw.u,
-            session: Cookies.get('session'),
-            idmsa: Cookies.get('idmsa')
-          })
+      ax.post(`/session`, {
+        uid: jw.u,
+        session: Cookies.get('session'),
+        idmsa: Cookies.get('idmsa')
+      })
           .then(res => {
             if (res.data === 'OK') {
               setLogged(true)
@@ -52,6 +60,9 @@ export default function Idmsa() {
             setApplicationState({state: 'crashed'})
             console.error(err)
           })
+    } else {
+      setLogged(false)
+      setApplicationState({state: 'done'})
     }
   }, [])
 
@@ -63,6 +74,7 @@ export default function Idmsa() {
     login(fldUsername.current.value, fldPassword.current.value)
         .then(res => {
           setTimeout(() => setFormDisabled({type: 'none', includes: []}), 350)
+          if (res.data === 'Created') setLogged(true)
         })
         .catch(err => {
           setTimeout(() => setFormDisabled({type: 'none', includes: []}), 350)
@@ -175,10 +187,20 @@ async function login(username, passwd) {
     throw new Error('Password is empty')
   }
 
-  return await axios.post(
-      `${AppEndpoints.api}/idmsa/login`,
+  return await ax.post(
+      `/login`,
       {username: username, passwd: passwd}
   ).then(res => {
-    console.log(res.data)
+    return res
   })
+}
+
+async function logout() {
+  return await ax.post(`/logout`)
+      .then(res => {
+        return res
+      })
+      .catch(err => {
+        console.error(err)
+      })
 }

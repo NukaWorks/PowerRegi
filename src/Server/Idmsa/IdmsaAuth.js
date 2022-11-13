@@ -76,14 +76,9 @@ idmsa.post('/login', (req, res) => {
 })
 
 idmsa.post('/session', (req, res) => {
-  console.log(req.body)
   if (!req.body.session && !req.body.uid && !req.body.idmsa) {
     res.sendStatus(401)
-    return false
-  }
-
-  checkSession(req.body.session, req.body.uid).then(result => {
-    console.log('Session result', result)
+  } else checkSession(req.body.session, req.body.uid).then(result => {
     if (result) {
       res.sendStatus(200, 'OK')
     } else {

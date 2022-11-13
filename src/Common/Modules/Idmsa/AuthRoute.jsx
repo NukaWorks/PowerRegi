@@ -1,7 +1,6 @@
 import React from 'react'
-import Home from '../../Views/HomeView/HomeView'
-import { Navigate, Route } from 'react-router-dom'
-import { AuthContext } from './AppContexts'
+import { Navigate } from 'react-router-dom'
+import { AuthContext } from '../../Misc/AppContexts'
 
 export default function AuthRoute({children, element}) {
   const authContext = React.useContext(AuthContext)

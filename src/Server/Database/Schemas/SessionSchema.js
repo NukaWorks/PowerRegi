@@ -5,6 +5,7 @@ export const SessionSchema = new Schema({
   ip: String,
   ua: String,
   expires: Date,
+  disabled: { type: Boolean, default: false },
   createdAt: {
     type: Date,
     default: Date.now

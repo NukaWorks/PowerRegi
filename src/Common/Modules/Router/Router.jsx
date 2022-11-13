@@ -7,11 +7,9 @@ import ConsoleMgmt from '../../../Views/ConsoleMgmt/ConsoleMgmt'
 import SettingsView from '../../../Views/SettingsView/SettingsView'
 import ErrorView from '../../../Views/ErrorView/ErrorView'
 import ErrorTypes from '../../Misc/ErrorTypes'
-import AuthRoute from '../../Misc/AuthRoute'
+import AuthRoute from '../Idmsa/AuthRoute'
 
 export default function Router() {
-  const authContext = React.useContext(AuthContext)
-
   return (
       <BrowserRouter>
         <>

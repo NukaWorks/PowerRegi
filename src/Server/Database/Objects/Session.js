@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import { SessionSchema } from '../Schemas/SessionSchema'
 import env from '../../../Common/Misc/ConfigProvider.mjs'
+import { UserModel } from './User'
 
 const SessionModel = mongoose.model('Session', SessionSchema)
 
@@ -24,13 +25,11 @@ class Session {
   }
 }
 
-async function checkSession(id, user) {
-  return await SessionModel.findOne({id}).then(async session => {
-        return await user.findOne({sessions: id})
+async function checkSession(sid, uid) {
+  return await SessionModel.findOne({sid}).then(async session => {
+        return await UserModel.findOne({uid: uid, sessions: sid})
             .then(user => {
-              if (user) {
-                return session.createdAt > Date.now()
-              } else return false
+              return !!user;
             }).catch(() => false)
       }
   ).catch(() => false)

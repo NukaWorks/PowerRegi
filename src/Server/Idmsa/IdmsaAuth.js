@@ -4,8 +4,14 @@ import bcrypt from 'bcryptjs'
 import { makeAccessToken, UserModel } from '../Database/Objects/User'
 import env, { certKeys } from '../../Common/Misc/ConfigProvider.mjs'
 import cookieParser from 'cookie-parser'
+import jwdec from 'jwt-decode'
 import jwt from 'jsonwebtoken'
-import { checkSession, Session, SessionModel } from '../Database/Objects/Session'
+import {
+  checkSession,
+  disableSession,
+  Session,
+  SessionModel
+} from '../Database/Objects/Session'
 import chalk from 'chalk'
 
 const idmsa = express.Router()
@@ -85,6 +91,24 @@ idmsa.post('/session', (req, res) => {
       res.sendStatus(401, 'Unauthorized')
     }
   })
+})
+
+idmsa.post('/logout', (req, res) => {
+  if (req.cookies.session && req.cookies.idmsa) {
+    const jw = jwdec(req.cookies.idmsa) // Decode the token
+    disableSession(req.cookies.session, jw.u)
+        .then(result => {
+          if (result) {
+            res.clearCookie('session')
+            res.clearCookie('idmsa')
+            res.sendStatus(200, 'OK')
+          } else {
+            res.sendStatus(401, 'Unauthorized')
+          }
+        })
+  } else {
+    res.sendStatus(401, 'Unauthorized')
+  }
 })
 
 function commitAuth(session, res, req, token) {

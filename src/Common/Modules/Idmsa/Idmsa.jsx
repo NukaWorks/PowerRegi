@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useContext, useLayoutEffect, useRef } from 'react'
 import { Button, Link, Menu, MenuItem, MenuList, Text, TextField } from '@powerws/uikit'
 import { commercial_name, version } from '../../../../package.json'
 import { useQuery } from '../../Misc/Hooks'
 import { AuthContext, DataContext, StateContext } from '../../Misc/AppContexts'
 import Cookies from 'js-cookie'
-import { Navigate, useParams } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import axios from 'axios'
 import jwdec from 'jwt-decode'
 import { AppEndpoints } from '../../../App'
@@ -40,7 +40,7 @@ export default function Idmsa() {
             .then(() => {
               clearSession()
               setLogged(false)
-              query.delete('logout')
+              setApplicationState({state: 'done'})
             })
             .catch(err => {
               setApplicationState({state: 'crashed'})
@@ -49,33 +49,32 @@ export default function Idmsa() {
       } else {
         const jw = jwdec(Cookies.get('idmsa'))
         if (jw.exp > Math.floor(Date.now())) clearSession()
-
-        ax.post(`/session`, {
-          uid: jw.u,
-          session: Cookies.get('session'),
-          idmsa: Cookies.get('idmsa')
-        })
-            .then(res => {
-              if (res.data === 'OK') {
-                setLogged(true)
-              } else {
-                clearSession()
-                setLogged(false)
-              }
-              setApplicationState({state: 'done'})
-            })
-            .catch(err => {
-              if (err.response.status === 401) {
-                clearSession()
-                setLogged(false)
+          ax.post(`/session`, {
+            uid: jw.u,
+            session: Cookies.get('session'),
+            idmsa: Cookies.get('idmsa')
+          })
+              .then(res => {
+                if (res.data === 'OK') {
+                  setLogged(true)
+                } else {
+                  clearSession()
+                  setLogged(false)
+                }
                 setApplicationState({state: 'done'})
-              } else setApplicationState({state: 'crashed'})
-              console.error(err)
-            })
+              })
+              .catch(err => {
+                if (err.response.status === 401) {
+                  clearSession()
+                  setLogged(false)
+                  setApplicationState({state: 'done'})
+                } else setApplicationState({state: 'crashed'})
+                console.error(err)
+              })
       }
     } else {
-      setLogged(false)
       clearSession()
+      setLogged(false)
       setApplicationState({state: 'done'})
     }
   }, [])
@@ -167,7 +166,7 @@ export default function Idmsa() {
             <div className={'Module__IdmsaUi--Content__Controls'}>
               <Link
                   disabled={formDisabled.type === 'all'}
-                  href={'#'}
+                  href={'/idmsa?logout=true'}
               >
                 I forgot my account
               </Link>

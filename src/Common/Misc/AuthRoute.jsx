@@ -3,11 +3,11 @@ import Home from '../../Views/HomeView/HomeView'
 import { Navigate, Route } from 'react-router-dom'
 import { AuthContext } from './AppContexts'
 
-export default function AuthRoute({children}) {
+export default function AuthRoute({children, element}) {
   const authContext = React.useContext(AuthContext)
 
   if (authContext.logged) {
-    return children
+    return children || element
   } else {
     return (
         <Navigate

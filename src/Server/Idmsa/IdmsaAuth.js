@@ -76,8 +76,20 @@ idmsa.post('/login', (req, res) => {
 })
 
 idmsa.post('/session', (req, res) => {
-  // Fetch les cookies et faire
-  checkSession(req.cookies.session, req.body.uid)
+  console.log(req.body)
+  if (!req.body.session && !req.body.uid && !req.body.idmsa) {
+    res.sendStatus(401)
+    return false
+  }
+
+  checkSession(req.body.session, req.body.uid).then(result => {
+    console.log('Session result', result)
+    if (result) {
+      res.sendStatus(200, 'OK')
+    } else {
+      res.sendStatus(401, 'Unauthorized')
+    }
+  })
 })
 
 function commitAuth(session, res, req, token) {

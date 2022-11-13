@@ -17,6 +17,7 @@ export default function Router() {
         <>
         <Routes>
           <Route path={'/'} element={<Navigate replace to={'/home'}/>}/>
+
           {/* Protected routes by Idmsa */}
           <Route caseSensitive path={'/home'} element={
             <AuthRoute element={<Home />} />

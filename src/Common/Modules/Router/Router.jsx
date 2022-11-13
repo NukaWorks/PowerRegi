@@ -17,15 +17,20 @@ export default function Router() {
         <>
         <Routes>
           <Route path={'/'} element={<Navigate replace to={'/home'}/>}/>
-          <Route path={'/home'} element={
-            <AuthRoute>
-              <Home />
-            </AuthRoute>
+          {/* Protected routes by Idmsa */}
+          <Route caseSensitive path={'/home'} element={
+            <AuthRoute element={<Home />} />
           }/>
-          <Route caseSensitive path={'/idmsa'} element={<IdmsaView />}/>
-          <Route caseSensitive path={'/console'} element={<ConsoleMgmt/>}/>
-          <Route caseSensitive path={'/settings'} element={<SettingsView/>}/>
 
+          <Route caseSensitive path={'/console'} element={
+            <AuthRoute element={<ConsoleMgmt />} />
+          }/>
+
+          <Route caseSensitive path={'/settings'} element={
+            <AuthRoute element={<SettingsView />} />
+          }/>
+
+          <Route caseSensitive path={'/idmsa'} element={<IdmsaView />}/>
           <Route path="*" element={<ErrorView errorCode={ErrorTypes['404']}/>}/>
         </Routes>
         </>

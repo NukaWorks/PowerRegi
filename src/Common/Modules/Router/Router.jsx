@@ -11,28 +11,26 @@ import AuthRoute from '../Idmsa/AuthRoute'
 
 export default function Router() {
   return (
-      <BrowserRouter>
-        <>
+      <>
         <Routes>
           <Route path={'/'} element={<Navigate replace to={'/home'}/>}/>
 
           {/* Protected routes by Idmsa */}
           <Route caseSensitive path={'/home'} element={
-            <AuthRoute element={<Home />} />
+            <AuthRoute element={<Home/>}/>
           }/>
 
           <Route caseSensitive path={'/console'} element={
-            <AuthRoute element={<ConsoleMgmt />} />
+            <AuthRoute element={<ConsoleMgmt/>}/>
           }/>
 
           <Route caseSensitive path={'/settings'} element={
-            <AuthRoute element={<SettingsView />} />
+            <AuthRoute element={<SettingsView/>}/>
           }/>
 
-          <Route caseSensitive path={'/idmsa'} element={<IdmsaView />}/>
+          <Route caseSensitive path={'/idmsa'} element={<IdmsaView/>}/>
           <Route path="*" element={<ErrorView errorCode={ErrorTypes['404']}/>}/>
         </Routes>
-        </>
-      </BrowserRouter>
+      </>
   )
 }

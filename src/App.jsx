@@ -1,10 +1,10 @@
 import {
   AppActivity,
-  AppHeader,
+  AppHeader, ContextContent,
   Menu,
   MenuBar,
   MenuItem,
-  MenuList,
+  MenuList, Sidebar, SidebarItem,
   Spinner,
   UiApp
 } from '@powerws/uikit'
@@ -17,6 +17,7 @@ import { AuthContext, StateContext } from './Common/Misc/AppContexts'
 import Router from './Common/Modules/Router/Router'
 import { DataContext } from './Common/Misc/AppContexts'
 import StatusOverlay from './Common/Modules/StatusOverlay/StatusOverlay'
+import { BrowserRouter } from 'react-router-dom'
 
 
 export const AppConfig = {
@@ -53,55 +54,66 @@ export default function App() {
         <DataContext.Provider value={{data, setData}}>
           <AuthContext.Provider value={{logged, setLogged}}>
             <AppActivity theme={'Light'}>
-              <AppHeader title={commercial_name}>
-                <MenuBar>
-                  <Menu title={'File'}>
-                    <MenuList>
-                      <MenuItem>New Repository</MenuItem>
-                      <MenuItem>New Application</MenuItem>
-                      <MenuItem>New Package</MenuItem>
-                      <MenuItem>Settings</MenuItem>
-                      <MenuItem
-                          disabled={logged}
-                          onClick={() => window.location = `/idmsa?logout=true&redirect=${encodeURIComponent(document.location.pathname)}`}>
-                        Logout...
-                      </MenuItem>
-                    </MenuList>
-                  </Menu>
+              <BrowserRouter>
+                <AppHeader title={commercial_name}>
+                  <MenuBar>
+                    <Menu title={'File'}>
+                      <MenuList>
+                        <MenuItem>New Repository</MenuItem>
+                        <MenuItem>New Application</MenuItem>
+                        <MenuItem>New Package</MenuItem>
+                        <MenuItem>Settings</MenuItem>
+                        <MenuItem
+                            disabled={logged}
+                            onClick={() => window.location = `/idmsa?logout=true&redirect=${encodeURIComponent(document.location.pathname)}`}>
+                          Logout...
+                        </MenuItem>
+                      </MenuList>
+                    </Menu>
 
-                  <Menu title={'Tools'}>
-                    <MenuList>
-                      <MenuItem onClick={() => window.location = '/home'}>Go to Home View</MenuItem>
-                      <MenuItem onClick={() => window.location.reload()}>Reload</MenuItem>
-                    </MenuList>
-                  </Menu>
+                    <Menu title={'Tools'}>
+                      <MenuList>
+                        <MenuItem onClick={() => window.location = '/home'}>Go to Home
+                          View</MenuItem>
+                        <MenuItem onClick={() => window.location.reload()}>Reload</MenuItem>
+                      </MenuList>
+                    </Menu>
 
-                  <Menu title={'Help'}>
-                    <MenuList>
-                      <MenuItem>Check for Updates...</MenuItem>
-                      <MenuItem>Documentation Center</MenuItem>
-                      <MenuItem>About PowerWs & UiKit</MenuItem>
-                      <MenuItem>About {commercial_name}</MenuItem>
-                    </MenuList>
-                  </Menu>
-                </MenuBar>
-              </AppHeader>
+                    <Menu title={'Help'}>
+                      <MenuList>
+                        <MenuItem>Check for Updates...</MenuItem>
+                        <MenuItem>Documentation Center</MenuItem>
+                        <MenuItem>About PowerWs & UiKit</MenuItem>
+                        <MenuItem>About {commercial_name}</MenuItem>
+                      </MenuList>
+                    </Menu>
+                  </MenuBar>
+                </AppHeader>
+                {applicationState.state === 'loading' ? (
+                    <div className={'App__LoadingScreen'}>
+                      <Spinner size={'Large'} color={'Blue'}/>
+                    </div>
+                ) : (
+                    <ContextContent>
+                      <Sidebar>
+                        <SidebarItem icon={'home'} text={'Home'}/>
+                        <SidebarItem icon={'inventory_2'} text={'Packages'}/>
+                        <SidebarItem icon={'terminal'} text={'Console Management'}/>
+                        <SidebarItem icon={'settings'} text={'Settings'}/>
+                        <SidebarItem icon={'info'} text={'About'}/>
+                      </Sidebar>
 
-              {applicationState.state === 'loading' ? (
-                  <div className={'App__LoadingScreen'}>
-                    <Spinner size={'Large'} color={'Blue'}/>
-                  </div>
-              ) : (
-                  <UiApp rounded>
+                      <UiApp rounded>
 
-                    {applicationState.state === 'crashed' ? (
-                        <ErrorView errorCode={ErrorTypes['500']}/>
-                    ) : (
-                        <Router data={data}/>
-                    )}
-                  </UiApp>
-              )}
-
+                        {applicationState.state === 'crashed' ? (
+                            <ErrorView errorCode={ErrorTypes['500']}/>
+                        ) : (
+                            <Router data={data}/>
+                        )}
+                      </UiApp>
+                    </ContextContent>
+                )}
+              </BrowserRouter>
               <StatusOverlay/>
             </AppActivity>
           </AuthContext.Provider>

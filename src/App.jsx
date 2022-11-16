@@ -104,7 +104,6 @@ export default function App() {
                       </Sidebar>
 
                       <UiApp rounded>
-
                         {applicationState.state === 'crashed' ? (
                             <ErrorView errorCode={ErrorTypes['500']}/>
                         ) : (

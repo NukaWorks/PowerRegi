@@ -627,10 +627,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.6.tgz#cee20bd55e68a1720bdab363ecf0c821ded4cd45"
   integrity sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==
 
-"@powerws/uikit@^1.0.35":
-  version "1.0.35"
-  resolved "https://registry.yarnpkg.com/@powerws/uikit/-/uikit-1.0.35.tgz#9d3827f59678157dae132bb353f94e8ee1f4653c"
-  integrity sha512-EfTMbstzBSLkbpuP+4/6SZ1nHzooSB6pMm1i8GeLgO3722O2swndqEQwBwcMTyZPbjVck3LQpewxIVgQWtqLNg==
+"@powerws/uikit@^1.0.41":
+  version "1.0.41"
+  resolved "https://registry.yarnpkg.com/@powerws/uikit/-/uikit-1.0.41.tgz#b782d8e943e397e00171201fb2af86ca119d56e8"
+  integrity sha512-SY8S9TmgDOPKAdaD8/pljmBhjpLhTGkZQf9J7iKQDDHPbsEPKV8Z86bMlf8ib+gAtwF8wgNQnN6Vh+b5CUDXhA==
   dependencies:
     react "^18.2.0"
     react-detect-click-outside "^1.1.7"

@@ -1,8 +1,12 @@
 .App {
   &__IdmsaView {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
+}
+
+.Dynamic__Header {
+  position: fixed; // Enforce centering for Idmsa Component
 }

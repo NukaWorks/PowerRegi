@@ -1,6 +1,6 @@
 import {
   AppActivity,
-  AppHeader, ContextContent,
+  AppHeader, VBox,
   Menu,
   MenuBar,
   MenuItem,
@@ -94,7 +94,7 @@ export default function App() {
                       <Spinner size={'Large'} color={'Blue'}/>
                     </div>
                 ) : (
-                    <ContextContent>
+                    <VBox>
                       <Sidebar>
                         <SidebarItem icon={'home'} text={'Home'}/>
                         <SidebarItem icon={'inventory_2'} text={'Packages'}/>
@@ -111,7 +111,7 @@ export default function App() {
                             <Router data={data}/>
                         )}
                       </UiApp>
-                    </ContextContent>
+                    </VBox>
                 )}
               </BrowserRouter>
               <StatusOverlay/>

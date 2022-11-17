@@ -3,16 +3,14 @@
     min-height: 100%;
     background: url("/public/Error.svg") no-repeat center top;
     background-size: 75%;
+    align-items: center;
+    justify-content: center;
 
     &--Message {
       display: flex;
       align-items: center;
       color: #DD8888;
       gap: 3%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
       user-select: none;
       -webkit-user-select: none;
       pointer-events: none;
@@ -40,4 +38,8 @@
       }
     }
   }
+}
+
+.Dynamic__Header {
+  position: fixed; // Enforce centering for Idmsa Component
 }

@@ -9,9 +9,9 @@ import ErrorView from '../../../Views/ErrorView/ErrorView'
 import ErrorTypes from '../../Misc/ErrorTypes'
 import AuthRoute from '../Idmsa/AuthRoute'
 
-export default function Router() {
+export default function AppRouter() {
   return (
-      <>
+      <BrowserRouter>
         <Routes>
           <Route path={'/'} element={<Navigate replace to={'/home'}/>}/>
 
@@ -31,6 +31,6 @@ export default function Router() {
           <Route caseSensitive path={'/idmsa'} element={<IdmsaView/>}/>
           <Route path="*" element={<ErrorView errorCode={ErrorTypes['404']}/>}/>
         </Routes>
-      </>
+      </BrowserRouter>
   )
 }

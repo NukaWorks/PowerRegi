@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import './ErrorView.scss'
 import ExclamationIcon from '../../Common/Assets/Icons/ExclamationIcon.svg'
 import { commercial_name } from '../../../package.json'
 import PropTypes from 'prop-types'
 import ErrorTypes from '../../Common/Misc/ErrorTypes'
+import { StateContext } from '../../Common/Misc/AppContexts'
 
 export default function ErrorView(props) {
+  const {applicationState, setApplicationState} = useContext(StateContext)
+
+  useEffect(() => {
+    setApplicationState({state: 'crashed'})
+  }, [])
+
     return (
         <>
           <div className={'Dynamic__Header'}>

@@ -62,7 +62,7 @@ async function deleteAllExpiredSessions(uid) {
 
 async function disableSession(sid, uid) {
    return await UserModel.findOne({uid: uid}).then(user => {
-     return SessionModel.updateOne({sid: sid}, {disabled: true})
+     return SessionModel.updateOne({id: sid}, {disabled: true})
   })
 }
 

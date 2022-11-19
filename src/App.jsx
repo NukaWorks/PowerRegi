@@ -90,7 +90,7 @@ export default function App() {
                   </MenuBar>
                 </AppHeader>
                 {applicationState.state === 'loading' ? (
-                    <LoadingOverlay />
+                    <LoadingOverlay/>
                 ) : (
                     <VBox>
                       {applicationState.state !== 'crashed' ? (
@@ -111,14 +111,15 @@ export default function App() {
                                          active={targetState.target === '/settings/about'}
                                          onClick={() => setTargetState({target: '/settings/about'})}/>
                           </Sidebar>
-                      ) : <></>}
-
-                      <UiApp rounded>
-                        {applicationState.state === 'crashed' ? (
-                                <ErrorView errorCode={ErrorTypes['500']}/>)
-                            : (<></>)}
-                        <AppRouter data={data}/>
-                      </UiApp>
+                      ) : (
+                          <UiApp rounded>
+                            {applicationState.state === 'crashed' ? (
+                                    <ErrorView errorCode={ErrorTypes['500']}/>)
+                                : (
+                                    <AppRouter data={data}/>
+                                )}
+                          </UiApp>
+                      )}
                     </VBox>
                 )}
                 <StatusOverlay/>

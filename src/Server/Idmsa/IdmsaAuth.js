@@ -114,14 +114,12 @@ idmsa.post('/logout', (req, res) => {
 function commitAuth(session, res, req, token) {
   if (session) res.cookie('session', session.id, {
     maxAge: env.APP_SESSION_EXPIRES * 60 * 60 * 1000,
-    sameSite: 'strict',
-    secure: true
+    sameSite: 'strict'
   })
 
   if (token) res.cookie('idmsa', token, {
     maxAge: env.APP_SESSION_EXPIRES * 60 * 60 * 1000,
-    sameSite: 'strict',
-    secure: true
+    sameSite: 'strict'
   })
 
   if (!token && !session) {

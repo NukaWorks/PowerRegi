@@ -1,6 +1,5 @@
 import React from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import { AuthContext } from '../../Misc/AppContexts'
 import Home from '../../../Views/HomeView/HomeView'
 import IdmsaView from '../../../Views/IdmsaView/IdmsaView'
 import ConsoleMgmt from '../../../Views/ConsoleMgmt/ConsoleMgmt'

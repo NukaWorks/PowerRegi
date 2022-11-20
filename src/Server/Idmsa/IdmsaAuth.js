@@ -6,12 +6,7 @@ import env, { certKeys } from '../../Common/Misc/ConfigProvider.mjs'
 import cookieParser from 'cookie-parser'
 import jwdec from 'jwt-decode'
 import jwt from 'jsonwebtoken'
-import {
-  checkSession,
-  disableSession,
-  Session,
-  SessionModel
-} from '../Database/Objects/Session'
+import { checkSession, disableSession, Session, SessionModel } from '../Database/Objects/Session'
 import chalk from 'chalk'
 
 const idmsa = express.Router()

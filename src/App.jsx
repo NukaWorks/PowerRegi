@@ -94,30 +94,32 @@ export default function App() {
                 ) : (
                     <VBox>
                       {applicationState.state !== 'crashed' ? (
-                          <Sidebar>
-                            <SidebarItem icon={'home'} text={'Home'}
-                                         active={targetState.target === '/home'}
-                                         onClick={() => setTargetState({target: '/home'})}/>
-                            <SidebarItem icon={'inventory_2'} text={'Packages'}
-                                         active={targetState.target === '/console/packages'}
-                                         onClick={() => setTargetState({target: '/console/packages'})}/>
-                            <SidebarItem icon={'terminal'} text={'Console Management'}
-                                         active={targetState.target === '/console'}
-                                         onClick={() => setTargetState({target: '/console'})}/>
-                            <SidebarItem icon={'settings'} text={'Settings'}
-                                         active={targetState.target === '/settings'}
-                                         onClick={() => setTargetState({target: '/settings'})}/>
-                            <SidebarItem icon={'info'} text={'About'}
-                                         active={targetState.target === '/settings/about'}
-                                         onClick={() => setTargetState({target: '/settings/about'})}/>
-                          </Sidebar>
+                          <>
+                            <Sidebar>
+                              <SidebarItem icon={'home'} text={'Home'}
+                                           active={targetState.target === '/home'}
+                                           onClick={() => setTargetState({target: '/home'})}/>
+                              <SidebarItem icon={'inventory_2'} text={'Packages'}
+                                           active={targetState.target === '/console/packages'}
+                                           onClick={() => setTargetState({target: '/console/packages'})}/>
+                              <SidebarItem icon={'terminal'} text={'Console Management'}
+                                           active={targetState.target === '/console'}
+                                           onClick={() => setTargetState({target: '/console'})}/>
+                              <SidebarItem icon={'settings'} text={'Settings'}
+                                           active={targetState.target === '/settings'}
+                                           onClick={() => setTargetState({target: '/settings'})}/>
+                              <SidebarItem icon={'info'} text={'About'}
+                                           active={targetState.target === '/settings/about'}
+                                           onClick={() => setTargetState({target: '/settings/about'})}/>
+                            </Sidebar>
+
+                            <UiApp rounded>
+                              <AppRouter data={data}/>
+                            </UiApp>
+                          </>
                       ) : (
                           <UiApp rounded>
-                            {applicationState.state === 'crashed' ? (
-                                    <ErrorView errorCode={ErrorTypes['500']}/>)
-                                : (
-                                    <AppRouter data={data}/>
-                                )}
+                            <ErrorView errorCode={ErrorTypes['500']}/>
                           </UiApp>
                       )}
                     </VBox>

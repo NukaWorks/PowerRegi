@@ -11,7 +11,6 @@ export default function ErrorView(props) {
 
   useEffect(() => {
     if (props.errorCode === ErrorTypes['520']) setApplicationState({state: 'crashed'})
-    console.log(applicationState)
   }, [])
 
     return (

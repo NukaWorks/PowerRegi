@@ -29,7 +29,9 @@ export default function AppRouter() {
           }/>
 
           <Route caseSensitive path={'/idmsa'} element={<IdmsaView/>}/>
-          <Route path="*" element={<ErrorView errorCode={ErrorTypes['404']}/>}/>
+          <Route path="*" element={
+            <AuthRoute enforceAuth element={<ErrorView errorCode={ErrorTypes['404']}/>}/>
+          }/>
         </Routes>
       </BrowserRouter>
   )

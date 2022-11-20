@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { AuthContext, TargetContext } from '../../Misc/AppContexts'
 
-export default function AuthRoute({children, element}) {
+export default function AuthRoute({children, element, enforceAuth}) {
   const authContext = React.useContext(AuthContext)
   const {targetState, setTargetState} = React.useContext(TargetContext)
 
@@ -15,7 +15,7 @@ export default function AuthRoute({children, element}) {
     }
   }, [targetState.target])
 
-  if (authContext.logged) {
+  if (authContext.logged || enforceAuth) {
     return children || element
   } else {
     return (

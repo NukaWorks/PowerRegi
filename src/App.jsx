@@ -101,9 +101,6 @@ export default function App() {
                                            active={targetState.target === '/home'}
                                            onClick={() => setTargetState({target: '/home'})}/>
                               <SidebarItem icon={'inventory_2'} text={'Packages'}
-                                           active={targetState.target === '/console/packages'}
-                                           onClick={() => setTargetState({target: '/console/packages'})}/>
-                              <SidebarItem icon={'terminal'} text={'Console Management'}
                                            active={targetState.target === '/console'}
                                            onClick={() => setTargetState({target: '/console'})}/>
                               <SidebarItem icon={'settings'} text={'Settings'}

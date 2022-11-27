@@ -1,5 +1,5 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
 const Status = styled.div`
   position: absolute;
@@ -11,16 +11,16 @@ const Status = styled.div`
   border-top-left-radius: 5px;
   -webkit-user-select: none;
   user-select: none;
-`
+`;
 
 export default function StatusOverlay() {
-  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
     return (
-        <Status className={'App__StatusOverlay'}>
-          <div className={'App__StatusOverlay--Content'}>
-            <h3>{process.env.NODE_ENV === 'development' ? 'Devel Mode' : ''}</h3>
-          </div>
-        </Status>
-    )
+      <Status className={"App__StatusOverlay"}>
+        <div className={"App__StatusOverlay--Content"}>
+          <h3>{process.env.NODE_ENV === "development" ? "Devel Mode" : ""}</h3>
+        </div>
+      </Status>
+    );
   }
 }

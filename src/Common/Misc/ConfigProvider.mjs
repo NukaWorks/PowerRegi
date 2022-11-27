@@ -1,74 +1,70 @@
-import fs from 'fs'
-import os from 'os'
-import logger from 'electron-log'
-import chalk from 'chalk'
+import fs from "fs";
+import os from "os";
+import logger from "electron-log";
+import chalk from "chalk";
 
-const log = logger.scope('ConfigProvider')
+const log = logger.scope("ConfigProvider");
 
-let instance = null
-const popularDirs = [
-  './',
-  '../',
-  '../../',
-  'dist/',
-  'public/'
-]
+let instance = null;
+const popularDirs = ["./", "../", "../../", "dist/", "public/"];
 
 const defaultConfig = {
-  'APP_HOST': os.hostname(),
-  'APP_WEBUI_PORT': 8080,
-  'APP_API_PORT': 8081,
-  'APP_DB_URI': 'mongodb://localhost:27017/regi',
-  'APP_LOG_LEVEL': 'debug',
-  'APP_SESSION_EXPIRES': '48' // 2 days
-}
+  APP_HOST: os.hostname(),
+  APP_WEBUI_PORT: 8080,
+  APP_API_PORT: 8081,
+  APP_DB_URI: "mongodb://localhost:27017/regi",
+  APP_LOG_LEVEL: "debug",
+  APP_SESSION_EXPIRES: "48", // 2 days
+};
 
 function searchFiles(name) {
   for (const dir of popularDirs) {
     if (fs.existsSync(dir + name)) {
-      return fs.readFileSync(dir + name)
+      return fs.readFileSync(dir + name);
     }
   }
 }
 
-let certKeys = {}
+let certKeys = {};
 
 function fetchConfig() {
-  let runningConfig
+  let runningConfig;
 
-  runningConfig = JSON.parse(searchFiles('.env.json'))
-  certKeys.privkey = searchFiles('regi.key')
-  certKeys.pubkey = searchFiles('regi.key.pub')
+  runningConfig = JSON.parse(searchFiles(".env.json"));
+  certKeys.privkey = searchFiles("regi.key");
+  certKeys.pubkey = searchFiles("regi.key.pub");
 
   for (const key in defaultConfig) {
     if (!runningConfig.hasOwnProperty(key)) {
-      log.warn(`ExternalConfig is missing key: ${chalk.white.bold(key)}, using default`)
-      runningConfig[key] = defaultConfig[key]
+      log.warn(
+        `ExternalConfig is missing key: ${chalk.white.bold(key)}, using default`
+      );
+      runningConfig[key] = defaultConfig[key];
     }
   }
 
-  return runningConfig
+  return runningConfig;
 }
 
 class ConfigProvider {
   constructor() {
-    let currentConfig = fetchConfig()
+    let currentConfig = fetchConfig();
     if (currentConfig) {
-      this.config = currentConfig
-      return this.config
+      this.config = currentConfig;
+      return this.config;
     } else {
-      throw new Error('No config file found')
+      throw new Error("No config file found");
     }
   }
 }
 
 function getConfig() {
   if (instance === null) {
-    instance = new ConfigProvider()
+    instance = new ConfigProvider();
   }
 
-  return instance
+  return instance;
 }
 
-export {certKeys}
-export default getConfig()
+export { certKeys };
+export default getConfig();

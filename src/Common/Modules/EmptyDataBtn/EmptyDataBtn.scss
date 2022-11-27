@@ -5,19 +5,16 @@
     align-items: center;
     justify-content: center;
     gap: 2em;
-    background-color: #FFFCFC;
+    background-color: #fffcfc;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     width: 60em;
     height: 40em;
     user-select: none;
     -webkit-user-select: none;
-    transition:
-            background-color 0.1s ease-in-out,
-            box-shadow 0.1s ease-in-out;
+    transition: background-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
 
-    @media screen and (max-width: 900px),
-    screen and (max-height: 700px) {
+    @media screen and (max-width: 900px), screen and (max-height: 700px) {
       flex-direction: row;
       width: fit-content;
       height: fit-content;

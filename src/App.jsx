@@ -117,36 +117,42 @@ export default function App() {
                   applicationState.state !== "crashed" &&
                   (applicationState.state === "done" || "view-not-found") ? (
                     <>
-                      <Sidebar>
-                        <SidebarItem
-                          icon={"home"}
-                          text={"Home"}
-                          active={targetState.target === "/home"}
-                          onClick={() => setTargetState({ target: "/home" })}
-                        />
-                        <SidebarItem
-                          icon={"inventory_2"}
-                          text={"Packages"}
-                          active={targetState.target === "/console"}
-                          onClick={() => setTargetState({ target: "/console" })}
-                        />
-                        <SidebarItem
-                          icon={"settings"}
-                          text={"Settings"}
-                          active={targetState.target === "/settings"}
-                          onClick={() =>
-                            setTargetState({ target: "/settings" })
-                          }
-                        />
-                        <SidebarItem
-                          icon={"info"}
-                          text={"About"}
-                          active={targetState.target === "/settings/about"}
-                          onClick={() =>
-                            setTargetState({ target: "/settings/about" })
-                          }
-                        />
-                      </Sidebar>
+                      {logged ? (
+                        <Sidebar>
+                          <SidebarItem
+                            icon={"home"}
+                            text={"Home"}
+                            active={targetState.target === "/home"}
+                            onClick={() => setTargetState({ target: "/home" })}
+                          />
+                          <SidebarItem
+                            icon={"inventory_2"}
+                            text={"Packages"}
+                            active={targetState.target === "/console"}
+                            onClick={() =>
+                              setTargetState({ target: "/console" })
+                            }
+                          />
+                          <SidebarItem
+                            icon={"settings"}
+                            text={"Settings"}
+                            active={targetState.target === "/settings"}
+                            onClick={() =>
+                              setTargetState({ target: "/settings" })
+                            }
+                          />
+                          <SidebarItem
+                            icon={"info"}
+                            text={"About"}
+                            active={targetState.target === "/settings/about"}
+                            onClick={() =>
+                              setTargetState({ target: "/settings/about" })
+                            }
+                          />
+                        </Sidebar>
+                      ) : (
+                        <></>
+                      )}
 
                       <UiApp rounded>
                         <AppRouter data={data} />

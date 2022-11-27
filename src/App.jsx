@@ -44,6 +44,7 @@ export default function App() {
     axios.get(`${AppEndpoints.api}/`)
         .then(res => {
           setData(res.data)
+          setApplicationState({state: 'done'})
           return data
         })
         .catch(err => {

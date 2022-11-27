@@ -22,6 +22,7 @@ export default function Idmsa() {
   const dataContext = useContext(DataContext)
   const {logged, setLogged} = useContext(AuthContext)
   const {applicationState, setApplicationState} = useContext(StateContext)
+
   let logoutQuery = query.get('logout')
 
   ax = axios.create({
@@ -32,8 +33,9 @@ export default function Idmsa() {
   })
 
   useLayoutEffect(() => {
+    if (applicationState['state'] !== 'loading')
     setApplicationState({state: 'loading'})
-
+    
     if (Cookies.get('idmsa') && Cookies.get('session')) {
       if (logoutQuery && logged) {
         logout()

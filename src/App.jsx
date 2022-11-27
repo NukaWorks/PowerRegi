@@ -38,10 +38,12 @@ export default function App() {
   const [logged, setLogged] = React.useState(false)
 
   useEffect(() => {
+    if (applicationState['state'] !== 'loading')
+      setApplicationState({state: 'loading'})
+
     axios.get(`${AppEndpoints.api}/`)
         .then(res => {
           setData(res.data)
-          setApplicationState({state: 'done'})
           return data
         })
         .catch(err => {
@@ -94,7 +96,8 @@ export default function App() {
                     <LoadingOverlay/>
                 ) : (
                     <VBox>
-                      {applicationState.state !== 'crashed' ? (
+                      {applicationState.state !== 'crashed'
+                       && applicationState.state === 'done' ? (
                           <>
                             <Sidebar>
                               <SidebarItem icon={'home'} text={'Home'}

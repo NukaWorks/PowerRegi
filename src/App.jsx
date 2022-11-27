@@ -31,14 +31,14 @@ export const AppEndpoints = {
 }
 
 export default function App() {
-  // Available applicationStates: 'loading', 'view-not-found', 'crashed', 'done'.
+  // Availables application states: 'loading', 'view-not-found', 'crashed', 'done'.
   const [applicationState, setApplicationState] = React.useState({state: 'loading'})
   const [targetState, setTargetState] = React.useState({target: ''})
   const [data, setData] = React.useState({})
   const [logged, setLogged] = React.useState(false)
 
   useEffect(() => {
-    if (applicationState['state'] !== 'loading')
+    if (applicationState['state'] !== 'loading') 
       setApplicationState({state: 'loading'})
 
     axios.get(`${AppEndpoints.api}/`)
@@ -97,8 +97,7 @@ export default function App() {
                     <LoadingOverlay/>
                 ) : (
                     <VBox>
-                      {applicationState.state !== 'crashed'
-                       && applicationState.state === 'done' || 'view-not-found' ? (
+                      {applicationState.state !== 'crashed' && (data.length > 0 && applicationState.state === 'view-not-found' || applicationState.state === 'done')  ? (
                           <>
                             <Sidebar>
                               <SidebarItem icon={'home'} text={'Home'}

@@ -47,6 +47,7 @@ export default function Idmsa() {
             .catch(err => {
               setApplicationState({state: 'crashed'})
               console.error(err)
+              return err
             })
       } else {
         const jw = jwdec(Cookies.get('idmsa'))
@@ -72,6 +73,7 @@ export default function Idmsa() {
                   setApplicationState({state: 'done'})
                 } else setApplicationState({state: 'crashed'})
                 console.error(err)
+                return err
               })
       }
     } else {

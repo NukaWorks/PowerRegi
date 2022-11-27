@@ -31,7 +31,7 @@ export const AppEndpoints = {
 }
 
 export default function App() {
-  // Available applicationStates: 'loading', 'crashed', 'done'.
+  // Available applicationStates: 'loading', 'view-not-found', 'crashed', 'done'.
   const [applicationState, setApplicationState] = React.useState({state: 'loading'})
   const [targetState, setTargetState] = React.useState({target: ''})
   const [data, setData] = React.useState({})
@@ -98,7 +98,7 @@ export default function App() {
                 ) : (
                     <VBox>
                       {applicationState.state !== 'crashed'
-                       && applicationState.state === 'done' ? (
+                       && applicationState.state === 'done' || 'view-not-found' ? (
                           <>
                             <Sidebar>
                               <SidebarItem icon={'home'} text={'Home'}

@@ -45,6 +45,7 @@
     & img {
       width: clamp(4em, 10vw, 10em);
       height: auto;
+      pointer-events: none;
     }
 
     &--Text {

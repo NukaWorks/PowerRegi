@@ -5,4 +5,4 @@ const DataContext = React.createContext();
 const StateContext = React.createContext();
 const TargetContext = React.createContext();
 
-export { AuthContext, DataContext, StateContext, TargetContext };
+export {AuthContext, DataContext, StateContext, TargetContext};

@@ -15,7 +15,7 @@ const psParams = {
   cwd: './.regi',
   maxBuffer: 2000 * 1024,
   detached: false,
-  killSignal: 'SIGKILL',
+  killSignal: 'SIGTERM',
   env: {...process.env, FORCE_COLOR: '1'}
 }
 let previewProcess = {}
@@ -47,7 +47,7 @@ async function main() {
         if (error) {
           isCrashed = true
           log.error(`${chalk.bgRedBright.bold('Error')} Build failed — ${error}`)
-          await previewProcess.ps.kill('SIGKILL')
+          await previewProcess.ps.kill('SIGTERM')
           if (!isCrashed) {
             await startPreview(previewCmd).then(ps => {
               previewProcess.ps = ps
@@ -56,7 +56,7 @@ async function main() {
             })
           }
         } else {
-          await previewProcess.ps.kill('SIGKILL')
+          await previewProcess.ps.kill('SIGTERM')
           await startPreview(previewCmd).then(ps => {
             previewProcess.ps = ps
           }).catch(err => {
@@ -75,7 +75,8 @@ async function main() {
     })
 
     process.on('exit', () => {
-      previewProcess.ps.kill('SIGKILL')
+      previewProcess.ps.kill('SIGTERM')
+      process.exit(0)
     })
 
     rl.on('line', async (input) => {
@@ -83,7 +84,7 @@ async function main() {
         if (isCrashed) {
           log.error(`${chalk.bgRedBright.bold('Error')} Please fix errors before reloading`)
         } else {
-          await previewProcess.ps.kill('SIGKILL')
+          await previewProcess.ps.kill('SIGTERM')
           startPreview(previewCmd).then(ps => {
             previewProcess.ps = ps
             log.info(`${chalk.bgGreenBright.bold('Restarted')} !`)

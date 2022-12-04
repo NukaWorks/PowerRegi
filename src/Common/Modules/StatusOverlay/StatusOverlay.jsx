@@ -14,13 +14,13 @@ const Status = styled.div`
 `;
 
 export default function StatusOverlay() {
-  if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
-    return (
-      <Status className={"App__StatusOverlay"}>
-        <div className={"App__StatusOverlay--Content"}>
-          <h3>{process.env.NODE_ENV === "development" ? "Devel Mode" : ""}</h3>
-        </div>
-      </Status>
-    );
-  }
+   if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+      return (
+          <Status className={"App__StatusOverlay"}>
+             <div className={"App__StatusOverlay--Content"}>
+                <h3>{process.env.NODE_ENV === "development" ? "Devel Mode" : ""}</h3>
+             </div>
+          </Status>
+      );
+   }
 }

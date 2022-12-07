@@ -15,7 +15,7 @@ import React, {useEffect} from "react";
 import ErrorView from "./Views/ErrorView/ErrorView";
 import ErrorTypes from "./Common/Misc/ErrorTypes";
 import axios from "axios";
-import {AuthContext, DataContext, StateContext, TargetContext,} from "./Common/Misc/AppContexts";
+import {AuthContext, DataContext, StateContext, TargetContext} from "./Common/Misc/AppContexts";
 import AppRouter from "./Common/Modules/Router/AppRouter";
 import StatusOverlay from "./Common/Modules/StatusOverlay/StatusOverlay";
 import LoadingOverlay from "./Common/Modules/LoadingOverlay/LoadingOverlay";

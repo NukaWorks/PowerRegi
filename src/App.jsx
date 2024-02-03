@@ -1,15 +1,14 @@
 import {
    AppActivity,
-   AppHeader,
+   AppHeader, FlexLayout,
    Menu,
    MenuBar,
    MenuItem,
    MenuList,
    Sidebar,
-   SidebarItem,
+   SidebarItem, StackLayout,
    UiApp,
-   VBox,
-} from "@powerws/uikit";
+} from '@powerws/uikit'
 import {commercial_name} from "../package.json";
 import React, {useEffect} from "react";
 import ErrorView from "./Views/ErrorView/ErrorView";
@@ -61,7 +60,7 @@ export default function App() {
           <TargetContext.Provider value={{targetState, setTargetState}}>
              <DataContext.Provider value={{data, setData}}>
                 <AuthContext.Provider value={{logged, setLogged}}>
-                   <AppActivity theme={"Light"}>
+                   <AppActivity theme={"Light"} direction={'Vertical'}>
                       <AppHeader title={commercial_name}>
                          <MenuBar>
                             <Menu title={"File"}>
@@ -107,7 +106,7 @@ export default function App() {
                       {applicationState.state === "loading" ? (
                           <LoadingOverlay/>
                       ) : (
-                          <VBox>
+                          <FlexLayout direction={'Horizontal'} flex={1}>
                              {data.build !== undefined &&
                              applicationState.state !== "crashed" &&
                              (applicationState.state === "done" || "view-not-found") ? (
@@ -158,7 +157,7 @@ export default function App() {
                                     <ErrorView errorCode={ErrorTypes["500"]}/>
                                  </UiApp>
                              )}
-                          </VBox>
+                          </FlexLayout>
                       )}
                       <StatusOverlay/>
                    </AppActivity>
